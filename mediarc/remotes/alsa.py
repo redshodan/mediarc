@@ -6,9 +6,8 @@ from mediarc import interface
 
 
 LIMITS = re.compile("\s*Limits: Playback ([0-9]+) - ([0-9]+)")
-LEFT = re.compile("\s*Front Left: Playback ([0-9]+) \\[[0-9]+\\%\\] [!(off|on)]*\\[(off|on)\\].*")
-RIGHT = re.compile("\s*Front Right: Playback ([0-9]+) \\[[0-9]+\\%\\] [!(off|on)]*\\[(off|on)\\].*")
-
+LEFT = re.compile("\s*Front Left: Playback (?P<val>[0-9]+) \\[[0-9]+\\%\\][^(off|on)]*\\[(?P<mute>off|on)\\].*")
+RIGHT = re.compile("\s*Front Right: Playback (?P<val>[0-9]+) \\[[0-9]+\\%\\][^(off|on)]*\\[(?P<mute>off|on)\\].*")
 
 
 class Control(object):
@@ -77,10 +76,10 @@ class Control(object):
 				self.limits[0] = LIMITS.sub("\\1", line)
 				self.limits[1] = LIMITS.sub("\\2", line)
 			elif LEFT.match(line):
-				val = LEFT.sub("\\1 \\2", line)
+				val = LEFT.sub("\\g<val> \\g<mute>", line)
 				self.left = val.split(" ")
 			elif RIGHT.match(line):
-				val = RIGHT.sub("\\1 \\2", line)
+				val = RIGHT.sub("\\g<val> \\g<mute>", line)
 				self.right = val.split(" ")
 		return
 
