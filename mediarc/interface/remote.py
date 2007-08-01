@@ -106,14 +106,16 @@ class Remote(object):
 
 
 	def mapStock(self, btn, type, name):
+		isize = "large"
+		#isize = "small"
 		stock = None
 		img = gtk.Image()
 		label = ""
 		if type == "power":
 			return
 		elif type == "number":
-			img.set_from_file("%s/share/icons/%s.png" % (mediarc.location,
-														 name))
+			img.set_from_file("%s/share/icons/%s/%s.png" % (mediarc.location,
+															isize, name))
 		elif type == "forward":
 			stock = gtk.STOCK_MEDIA_FORWARD
 		elif type == "next":
@@ -138,10 +140,10 @@ class Remote(object):
 			stock = gtk.STOCK_GO_BACK
 		elif type == "right":
 			stock = gtk.STOCK_GO_FORWARD
-		elif type == "circle":
+		elif type == "button":
 			btn.set_image_position(gtk.POS_TOP)
 			label = name
-			img.set_from_file(mediarc.location + "/share/icons/btn.png")
+			img.set_from_file("%s/share/icons/btn.png" % (mediarc.location))
 		else:
 			stock = type
 		if stock:

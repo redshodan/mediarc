@@ -6,8 +6,8 @@ from mediarc import interface
 
 
 LIMITS = re.compile("\s*Limits: Playback ([0-9]+) - ([0-9]+)")
-LEFT = re.compile("\s*Front Left: Playback ([0-9]+) \\[[0-9]+\\%\\] .*\\[(off|on)\\].*")
-RIGHT = re.compile("\s*Front Right: Playback ([0-9]+) \\[[0-9]+\\%\\] .*\\[(off|on)\\].*")
+LEFT = re.compile("\s*Front Left: Playback ([0-9]+) \\[[0-9]+\\%\\] [!(off|on)]*\\[(off|on)\\].*")
+RIGHT = re.compile("\s*Front Right: Playback ([0-9]+) \\[[0-9]+\\%\\] [!(off|on)]*\\[(off|on)\\].*")
 
 
 
@@ -117,11 +117,11 @@ class Control(object):
 	def updateBtn(self):
 		if self.left[1] == "off":
 			img = gtk.Image()
-			img.set_from_file(mediarc.location + "/share/muted.png")
+			img.set_from_file(mediarc.location + "/share/icons/muted.png")
 			self.btn.set_image(img)
 		else:
 			img = gtk.Image()
-			img.set_from_file(mediarc.location + "/share/unmuted.png")
+			img.set_from_file(mediarc.location + "/share/icons/unmuted.png")
 			self.btn.set_image(img)
 		return
 

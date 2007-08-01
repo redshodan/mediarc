@@ -60,9 +60,9 @@
           <button name="searchright" type="forward" x="6-8"/>
         </row>
         <row>
-          <button name="topmenu" type="circle" x="1-3"/>
+          <button name="topmenu" type="button" x="1-3"/>
           <button name="up" type="up" x="3-5"/>
-          <button name="menu" type="circle" x="5-7"/>
+          <button name="menu" type="button" x="5-7"/>
         </row>
         <row>
           <button name="left" type="left" x="1-3"/>
@@ -70,9 +70,9 @@
           <button name="right" type="right" x="5-7"/>
         </row>
         <row>
-          <button name="display" type="circle" x="1-3"/>
+          <button name="display" type="button" x="1-3"/>
           <button name="down" type="down" x="3-5"/>
-          <button name="return" type="circle" x="5-7"/>
+          <button name="return" type="button" x="5-7"/>
         </row>
       </buttons>
     </remote>
