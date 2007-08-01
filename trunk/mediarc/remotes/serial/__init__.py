@@ -1,4 +1,4 @@
-import types
+from types import *
 import serial
 import gtk
 from mediarc import interface
@@ -112,7 +112,7 @@ class Serial(object):
 		else:
 			cmd = self.driver.chooseCmd(button)
 		if cmd:
-			if type(cmd) == types.LIST:
+			if type(cmd) == ListType:
 				for c in cmd:
 					c.send()
 			else:
