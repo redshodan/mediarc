@@ -2,7 +2,7 @@
 
 
 EXCLUDES="$*"
-VCS='svk'   # 'svn' also works fine
+VCS='svn'   # Valid values: svn or svk
 TOP=`pwd`
 DIRS=`find . -type d | grep -v .svn`
 
