@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mediarc>
+
+  <config>
+    <window>single</window>
+  </config>
+
+  <bindings>
+    <binding foo="bar"/>
+  </bindings>
+
+  <remotes>
+    <remote driver="alsa" card="0">
+      <source name="Master" step="2"/>
+      <source name="PCM"/>
+      <source name="Line"/>
+    </remote>
+
+    <remote driver="lirc" name="cable">
+      <buttons rows="2" cols="3">
+        <row>
+          <button name="power" type="power" x="0-3" y="0-1"/>
+        </row>
+        <row>
+          <button name="1" type="number"/>
+          <button name="2" type="number"/>
+          <button name="3" type="number"/>
+        </row>
+        <row>
+          <button name="4" type="number"/>
+          <button name="5" type="number"/>
+          <button name="6" type="number"/>
+        </row>
+        <row>
+          <button name="7" type="number"/>
+          <button name="8" type="number"/>
+          <button name="9" type="number"/>
+        </row>
+      </buttons>
+    </remote>
+
+    <remote driver="lirc" name="dvd">
+      <buttons>
+        <row>
+          <button name="power" type="power" x="0-8"/>
+        </row>
+        <row>
+          <button name="stop" type="stop" x="1-3"/>
+<!--
+          <button name="play-pause" type="play-pause" x="3-5" play="play"
+                  pause="pause"/>
+-->
+          <button name="pause" type="pause" x="3-5"/>
+          <button name="play" type="play" x="5-7"/>
+        </row>
+        <row>
+          <button name="skipleft" type="previous" x="0-2"/>
+          <button name="skipright" type="next" x="2-4"/>
+          <button name="searchleft" type="rewind" x="4-6"/>
+          <button name="searchright" type="forward" x="6-8"/>
+        </row>
+        <row>
+          <button name="topmenu" type="circle" x="1-3"/>
+          <button name="up" type="up" x="3-5"/>
+          <button name="menu" type="circle" x="5-7"/>
+        </row>
+        <row>
+          <button name="left" type="left" x="1-3"/>
+          <button name="enter" x="3-5"/>
+          <button name="right" type="right" x="5-7"/>
+        </row>
+        <row>
+          <button name="display" type="circle" x="1-3"/>
+          <button name="down" type="down" x="3-5"/>
+          <button name="return" type="circle" x="5-7"/>
+        </row>
+      </buttons>
+    </remote>
+
+    <remote driver="serial" name="TV" manufacturer="olevia" model="432V" 
+            device="/dev/ttyS0">
+      <buttons type="default"/>
+    </remote>
+  </remotes>
+
+</mediarc>
