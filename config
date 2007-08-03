@@ -46,10 +46,6 @@
         </row>
         <row>
           <button name="stop" type="stop" x="1-3"/>
-<!--
-          <button name="play-pause" type="play-pause" x="3-5" play="play"
-                  pause="pause"/>
--->
           <button name="pause" type="pause" x="3-5"/>
           <button name="play" type="play" x="5-7"/>
         </row>
