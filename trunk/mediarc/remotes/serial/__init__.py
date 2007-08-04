@@ -1,5 +1,12 @@
 from types import *
-import serial
+
+SUPPORTED = False
+try:
+	import serial
+	SUPPORTED = True
+except:
+	print "Failed to load pySerial module, skipping serial remotes"
+
 import gtk
 from mediarc import interface
 import olevia
@@ -124,10 +131,5 @@ class Serial(object):
 
 
 def new(cfg):
-	#try:
-	ser = Serial(cfg)
-	#except Exception, e:
-	#	print "Failed to load serial driver:"
-	#	print e
-	#	return None
-	return ser
+	if SUPPORTED:
+		return Serial(cfg)

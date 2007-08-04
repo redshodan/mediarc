@@ -148,4 +148,8 @@ class ALSA(object):
 
 
 def new(cfg):
-	return ALSA(cfg)
+	try:
+		return ALSA(cfg)
+	except:
+		print "Failed to load alsa remote"
+		return None
