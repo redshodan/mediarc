@@ -129,8 +129,9 @@ class Control(object):
 class ALSA(object):
 	def __init__(self, cfg):
 		self.cfg = cfg
-		self.card = cfg.getAttribute("card")
-		self.name = "card%s" % self.card
+		cfg.pullAttrs(self, ["name", "card"])
+		if not self.name:
+			self.name = "card%s" % self.card
 		self.ui = interface.addRemote(self.name)
 		self.ctls = {}
 		sources = cfg.getElems("source")
@@ -145,6 +146,10 @@ class ALSA(object):
 		return
 
 
+
+
+def init(cfg):
+	return
 
 
 def new(cfg):

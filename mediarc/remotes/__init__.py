@@ -3,6 +3,8 @@ import alsa, lirc, serial
 
 
 def init(cfg):
+	for mod in [alsa, lirc, serial]:
+		mod.init(cfg)
 	for elem in cfg.getElems("remotes/remote"):
 		load(elem)
 	return

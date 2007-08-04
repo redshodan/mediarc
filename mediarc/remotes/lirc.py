@@ -11,7 +11,7 @@ lirc_sock = None
 class LIRC(object):
 	def __init__(self, cfg):
 		self.cfg = cfg
-		self.name = cfg.getAttribute("name")
+		cfg.pullAttrs(self, ["name", "id"])
 		if cfg.get("command"):
 			self.cmd = cfg.get("command")
 		else:
@@ -26,7 +26,7 @@ class LIRC(object):
 
 	def buttonCB(self, button):
 		global lirc_sock
-		cmd = self.cmd.replace("%n", self.name)
+		cmd = self.cmd.replace("%n", self.id)
 		cmd = cmd.replace("%v", button.pyr_name)
 		print "LIRC callback %s, running: %s" % (button.pyr_name, cmd)
 		lirc_sock.send(cmd + "\n")
@@ -34,15 +34,20 @@ class LIRC(object):
 
 
 
-def new(cfg):
+def init(cfg):
 	global lirc_sock
-	if not lirc_sock:
-		lirc_sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-		print "connecting to LIRCD"
-		try:
-			lirc_sock.connect("/dev/lircd")
-		except Exception, e:
-			print "Failed to connect to LIRCD:"
-			print e
-			return None
+	scfg = cfg.getElem("drivers/driver=lirc")
+	sname = scfg.getAttr("socket")
+	lirc_sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+	print "connecting to LIRCD at", sname
+	try:
+		lirc_sock.connect(sname)
+	except Exception, e:
+		print "Failed to connect to LIRCD:"
+		print e
+		return None
+	return
+
+
+def new(cfg):
 	return LIRC(cfg)
