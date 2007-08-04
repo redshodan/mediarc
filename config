@@ -62,10 +62,8 @@
 	    <command name="vgacomp"><send>0xBE 0x05 0x25 0x0B 0xF4</send></command>
 	    <command name="read power status">
           <send>0xBE 0x05 0x90 0x00 0x53</send>
-          <responses>
-            <read name="on">0x06 0x05 0x90 0x01 0x9C</read>
-            <read name="off"/>
-          </responses>
+          <response name="on">0x06 0x05 0x90 0x01 0x9C</response>
+          <response name="off"/>
         </command>
       </commands>
       <buttons>
@@ -87,7 +85,7 @@
 	      <button name="6" type="number"><command name="6"/></button>
 	    </row>
         <row>
-          <button name="7" type="number"><command name=""/></button>
+          <button name="7" type="number"><command name="7"/></button>
 	      <button name="8" type="number"><command name="8"/></button>
 	      <button name="9" type="number"><command name="9"/></button>
 	    </row>

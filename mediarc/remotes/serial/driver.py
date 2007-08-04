@@ -14,6 +14,12 @@ class Driver(object):
 		for elem in cfg.getElems("commands/command"):
 			cmd = Command(elem)
 			self.cmds[cmd.name] = cmd
+		self.btns = {}
+		for button in cfg.getElems("buttons/row/button"):
+			name = button.getAttr("name")
+			self.btns[name] = []
+			for command in button.getElems("command"):
+				self.btns[name].append(command.getAttr("name"))
 		return
 
 
@@ -40,5 +46,22 @@ class Driver(object):
 		return
 
 
+	def send(self, cmd):
+		self.serial.write(cmd.cmd)
+		if cmd.readcnt:
+			ret = self.serial.read(cmd.readcnt)
+			if ret and ret in cmd.responses.keys():
+				resp = cmd.responses[ret]
+			elif not ret or ret == "":
+				resp = cmd.responses[""]
+			#self.gotResponseCB(self, cmd, resp)
+			print "got response:", resp
+		return
+
+
 	def getDefaultBtnCfg(self):
 		return self.cfg.getElem("buttons")
+
+
+	def getBtnCmds(self, name):
+		return self.cmds[name]
