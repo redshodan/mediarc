@@ -46,7 +46,7 @@ def printXML(self):
 	return
 
 
-def toStr(self, pretty = False):
+def toStrDoc(self, pretty = False):
 	if pretty:
 		return self.root().toPrettyStr()
 	else:
@@ -57,7 +57,7 @@ def toStr(self, pretty = False):
 def injectDocFuncs(doc):
 	inject(doc, setOpts)
 	inject(doc, printXML)
-	inject(doc, toStr)
+	inject(doc, toStrDoc, "toStr")
 	return
 
 
@@ -183,6 +183,12 @@ def name(self):
 def instName(self):
 	return self.root().getAttribute("name")
 
+
+def pullAttrs(self, obj, names):
+	for name in names:
+		if self.getAttr(name):
+			setattr(obj, name, self.getAttr(name))
+	return
 
 
 ###
@@ -376,6 +382,14 @@ def unIndent(self):
 	return
 
 
+def toStrElem(self, pretty = False):
+	if pretty:
+		return self.toPrettyStr()
+	else:
+		self.unIndent()
+		return self.toxml()
+
+
 def toPrettyStr(self, strs=[], indent=""):
 	isText = True
 	for node in self.childNodes:
@@ -402,8 +416,10 @@ def toPrettyStr(self, strs=[], indent=""):
 		return "\n".join(strs)
 
 
-def inject(obj, func):
-	setattr(obj, func.__name__, new.instancemethod(func, obj, obj.__class__))
+def inject(obj, func, name = None):
+	if not name:
+		name = func.__name__
+	setattr(obj, name, new.instancemethod(func, obj, obj.__class__))
 	return
 
 
@@ -421,6 +437,8 @@ def injectFuncs(elem):
 	inject(elem, instName)
 	inject(elem, setAttr)
 	inject(elem, getAttr)
+	inject(elem, pullAttrs)
+	inject(elem, toStrElem, "toStr")
 
 	# semi-private utilities
 	inject(elem, parsePath)
