@@ -1,5 +1,7 @@
 import serial
 from command import Command
+import mediarc
+from mediarc import mydom
 
 
 
@@ -65,3 +67,11 @@ class Driver(object):
 
 	def getBtnCmds(self, name):
 		return self.cmds[name]
+
+
+
+def load(manufacturer, model):
+	path = "%s/share/drivers/serial/%s/%s.xml" % \
+		   (mediarc.location, manufacturer, model)
+	cfg = mydom.readNew(path)
+	return Driver(cfg.getElem("driver"))

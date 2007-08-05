@@ -1,5 +1,5 @@
 0.1:
-- move the driver definitions to their own xml files
+- key bindings
 - device polling framework for reading status changes.
 
 0.2:
