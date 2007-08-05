@@ -36,6 +36,9 @@
           <button name="8" type="number"/>
           <button name="9" type="number"/>
         </row>
+        <row>
+          <button name="0" type="number" colspan="1-2"/>
+        </row>
       </buttons>
     </remote>
 
