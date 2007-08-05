@@ -60,7 +60,7 @@ class Serial(object):
 	def buttonCB(self, button):
 		print "Serial cb:", button.pyr_name
 		for cmd in button.pyr_cmds:
-			cmd.send()
+			self.driver.send(cmd)
 		if not len(button.pyr_cmds):
 			print "Error. Button %s had no command set" % button.pyr_name
 		return
