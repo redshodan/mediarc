@@ -32,11 +32,11 @@ class Remote(object):
 
 	def addButton(self, btn, cb):
 		name = btn.getAttribute("name")
-		xa = btn.getAttribute("x")
+		xa = btn.getAttribute("colspan")
 		x = [-1, -1]
 		if xa:
 			x = xa.split("-")
-		ya = btn.getAttribute("y")
+		ya = btn.getAttribute("rowspan")
 		y = [-1, -1]
 		if ya:
 			y = ya.split("-")

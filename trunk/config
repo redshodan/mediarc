@@ -68,7 +68,7 @@
       </commands>
       <buttons>
         <row>
-          <button name="power" type="power" x="0-8">
+          <button name="power" type="power" colspan="0-8">
             <command name="power on"/>
             <command name="power off"/>
             <state type="bool"/>
@@ -103,7 +103,7 @@
     <remote name="Cable" driver="lirc" id="cable">
       <buttons rows="2" cols="3">
         <row>
-          <button name="power" type="power" x="0-3" y="0-1"/>
+          <button name="power" type="power" colspan="0-3" rowspan="0-1"/>
         </row>
         <row>
           <button name="1" type="number"/>
@@ -126,33 +126,33 @@
     <remote name="DVD" driver="lirc" id="dvd">
       <buttons>
         <row>
-          <button name="power" type="power" x="0-8"/>
+          <button name="power" type="power" colspan="0-8"/>
         </row>
         <row>
-          <button name="stop" type="stop" x="1-3"/>
-          <button name="pause" type="pause" x="3-5"/>
-          <button name="play" type="play" x="5-7"/>
+          <button name="stop" type="stop" colspan="1-3"/>
+          <button name="pause" type="pause" colspan="3-5"/>
+          <button name="play" type="play" colspan="5-7"/>
         </row>
         <row>
-          <button name="skipleft" type="previous" x="0-2"/>
-          <button name="skipright" type="next" x="2-4"/>
-          <button name="searchleft" type="rewind" x="4-6"/>
-          <button name="searchright" type="forward" x="6-8"/>
+          <button name="skipleft" type="previous" colspan="0-2"/>
+          <button name="skipright" type="next" colspan="2-4"/>
+          <button name="searchleft" type="rewind" colspan="4-6"/>
+          <button name="searchright" type="forward" colspan="6-8"/>
         </row>
         <row>
-          <button name="topmenu" type="button" x="1-3"/>
-          <button name="up" type="up" x="3-5"/>
-          <button name="menu" type="button" x="5-7"/>
+          <button name="topmenu" type="button" colspan="1-3"/>
+          <button name="up" type="up" colspan="3-5"/>
+          <button name="menu" type="button" colspan="5-7"/>
         </row>
         <row>
-          <button name="left" type="left" x="1-3"/>
-          <button name="enter" x="3-5"/>
-          <button name="right" type="right" x="5-7"/>
+          <button name="left" type="left" colspan="1-3"/>
+          <button name="enter" colspan="3-5"/>
+          <button name="right" type="right" colspan="5-7"/>
         </row>
         <row>
-          <button name="display" type="button" x="1-3"/>
-          <button name="down" type="down" x="3-5"/>
-          <button name="return" type="button" x="5-7"/>
+          <button name="display" type="button" colspan="1-3"/>
+          <button name="down" type="down" colspan="3-5"/>
+          <button name="return" type="button" colspan="5-7"/>
         </row>
       </buttons>
     </remote>
