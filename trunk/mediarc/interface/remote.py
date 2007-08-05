@@ -144,6 +144,14 @@ class Remote(object):
 			btn.set_image_position(gtk.POS_TOP)
 			label = name
 			img.set_from_file("%s/share/icons/btn.png" % (mediarc.location))
+		elif type == "plus":
+			btn.set_image_position(gtk.POS_TOP)
+			label = name
+			stock = gtk.STOCK_ADD
+		elif type == "minus":
+			btn.set_image_position(gtk.POS_TOP)
+			label = name
+			stock = gtk.STOCK_REMOVE
 		else:
 			stock = type
 		if stock:
