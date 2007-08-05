@@ -5,27 +5,23 @@ from mediarc import interface
 
 SUPPORTED = False
 try:
-	from driver import Driver
+	import driver
 	SUPPORTED = True
 except:
 	print "Failed to load pySerial module, skipping serial remotes"
 
 
 
-drivers = {}
-
-
-
 class Serial(object):
 	def __init__(self, cfg):
-		global drivers
 		self.cfg = cfg
 		cfg.pullAttrs(self, ["name", "manufacturer", "model", "device"])
 		try:
-			self.driver = drivers[self.manufacturer][self.model]
-		except:
+			self.driver = driver.load(self.manufacturer, self.model)
+		except Exception, e:
 			print "For remote %s, invalid manufacturer and model: %s %s" % \
 				  (self.name, self.manufacturer, self.model)
+			print e
 			return
 		try:
 			self.driver.initSerial(self.device)
@@ -68,12 +64,6 @@ class Serial(object):
 
 
 def init(cfg):
-	global drivers
-	for elem in cfg.getElems("drivers/driver=serial"):
-		driver = Driver(elem)
-		if not driver.manufacturer in drivers.keys():
-			drivers[driver.manufacturer] = {}
-		drivers[driver.manufacturer][driver.model] = driver
 	return
 
 
