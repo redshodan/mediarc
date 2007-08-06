@@ -48,12 +48,6 @@ class Remote(object):
 		type = btn.getAttribute("type")
 		if type and len(type):
 			self.mapStock(button, type, name)
-		#if name == "power":
-		#	agrp = gtk.AccelGroup()
-		#	self.win.win.add_accel_group(agrp)
-		#	button.add_accelerator("clicked", agrp, ord('P'),
-		#						   0, gtk.ACCEL_VISIBLE)
-		#	#gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 		return button
 
 
