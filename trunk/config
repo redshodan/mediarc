@@ -2,7 +2,8 @@
 <mediarc>
 
   <config>
-    <window>single</window>
+    <!-- Valid modes are: single, tabbed, multiple -->
+    <window mode="tabbed"/>
   </config>
 
   <bindings>
