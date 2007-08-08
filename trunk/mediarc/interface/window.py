@@ -1,5 +1,6 @@
 import gtk
 from remote import Remote
+from mediarc.interface.menu import Menu
 
 
 
@@ -13,38 +14,40 @@ class Window(object):
 			self.initSingle()
 		elif self.mode == "tabbed":
 			self.initTabbed()
+		self.menu = Menu(cfg, self)
 		return
 
 
 	def addRemote(self, name):
 		remote = Remote(name, self)
 		if self.mode == "single":
-			self.container.attach(remote.frame, self.counter, self.counter + 1,
+			self.bin.attach(remote.frame, self.counter, self.counter + 1,
 								  1, 2)
 			self.counter = self.counter + 1
 		elif self.mode == "tabbed":
-			self.container.append_page(remote.frame, gtk.Label(name))
+			self.bin.append_page(remote.frame, gtk.Label(name))
+		self.menu.addRemote(name)
 		return remote
 
 
-	def deleteEvent(self, widget, event):
+	def deleteEventCB(self, widget, event):
 		gtk.main_quit()
 		return False
 
 
 	def initSingle(self):
 		self.win = self.initWindow()
-		self.container = gtk.Table(1, len(self.cfg.getElems("remotes/remote")))
-		self.container.set_col_spacings(20)
-		self.initContainer()
+		self.bin = gtk.Table(1, len(self.cfg.getElems("remotes/remote")))
+		self.bin.set_col_spacings(20)
+		self.initBin()
 		self.counter = 1
 		return
 
 
 	def initTabbed(self):
 		self.win = self.initWindow()
-		self.container = gtk.Notebook()
-		self.initContainer()
+		self.bin = gtk.Notebook()
+		self.initBin()
 		return
 
 
@@ -52,11 +55,12 @@ class Window(object):
 		return
 
 
-	def initContainer(self):
-		self.win.add(self.container)
-		self.container.set_flags(gtk.CAN_DEFAULT)
-		self.win.set_default(self.container)
-		self.container.show()
+	def initBin(self):
+		self.top_bin.pack_end(self.bin)
+		self.bin.set_flags(gtk.CAN_DEFAULT)
+		self.win.set_default(self.bin)
+		self.bin.set_border_width(10)
+		self.bin.show()
 		return
 
 
@@ -68,24 +72,9 @@ class Window(object):
 		win.set_title(fullname)
 		win.set_default_size(50, 50)
 		win.set_resizable(True)
-		win.set_border_width(10);
-		win.connect("delete_event", self.deleteEvent)
+		win.connect("delete_event", self.deleteEventCB)
+		win.show()
+		self.top_bin = gtk.VBox()
+		self.top_bin.show()
+		win.add(self.top_bin)
 		return win
-
-
-	def initAccels(self):
-		agrp = gtk.AccelGroup()
-		self.win.add_accel_group(agrp)
-		self.global_btn = gtk.Button("global")
-		self.global_btn.connect("clicked", self.globalBtnClickedCB)
-		self.table.attach(self.global_btn, 0, 1, 0, 1)
-		self.global_btn.hide()
-		self.global_btn.add_accelerator("clicked", agrp, ord('P'),
-										gtk.gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
-		return
-
-
-	def globalBtnClickedCB(self, button):
-		print "globalBtnClickedCB"
-		self.win.present()
-		return
