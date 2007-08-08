@@ -1,6 +1,7 @@
 import gtk
 from remote import Remote
 from mediarc.interface.menu import Menu
+from mediarc.interface.statusicon import StatusIcon
 
 
 
@@ -15,6 +16,7 @@ class Window(object):
 		elif self.mode == "tabbed":
 			self.initTabbed()
 		self.menu = Menu(cfg, self)
+		self.status_icon = StatusIcon(cfg, self)
 		return
 
 
