@@ -3,7 +3,7 @@
 
   <config>
     <!-- Valid modes are: single, tabbed, multiple -->
-    <window mode="tabbed"/>
+    <window mode="single"/>
   </config>
 
   <bindings>
