@@ -12,7 +12,7 @@ class Remote(object):
 		self.table_y = 0
 		# Table setup
 		self.table = gtk.Table(rows, cols, False)
-		self.table.set_flags(gtk.CAN_DEFAULT)
+		self.table.set_flags(gtk.CAN_DEFAULT | gtk.CAN_FOCUS)
 		self.table.set_row_spacings(10)
 		self.table.set_border_width(10)
 		self.table.show()
@@ -152,4 +152,9 @@ class Remote(object):
 			img.set_from_stock(stock, gtk.ICON_SIZE_BUTTON)
 		btn.set_label(label)
 		btn.set_image(img)
+		return
+
+
+	def select(self):
+		self.frame.get_child().grab_focus()
 		return
