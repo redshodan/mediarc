@@ -9,8 +9,10 @@ class Window(object):
 
 	def __init__(self, cfg):
 		self.cfg = cfg
+		self.remotes = {}
 		cfgwin = cfg.getElem("config/window")
 		self.mode = cfgwin.getAttr("mode")
+		self.initWindow()
 		if self.mode == "single":
 			self.initSingle()
 		elif self.mode == "tabbed":
@@ -20,25 +22,7 @@ class Window(object):
 		return
 
 
-	def addRemote(self, name):
-		remote = Remote(name, self)
-		if self.mode == "single":
-			self.bin.attach(remote.frame, self.counter, self.counter + 1,
-								  1, 2)
-			self.counter = self.counter + 1
-		elif self.mode == "tabbed":
-			self.bin.append_page(remote.frame, gtk.Label(name))
-		self.menu.addRemote(name)
-		return remote
-
-
-	def deleteEventCB(self, widget, event):
-		gtk.main_quit()
-		return False
-
-
 	def initSingle(self):
-		self.win = self.initWindow()
 		self.bin = gtk.Table(1, len(self.cfg.getElems("remotes/remote")))
 		self.bin.set_col_spacings(20)
 		self.initBin()
@@ -47,13 +31,8 @@ class Window(object):
 
 
 	def initTabbed(self):
-		self.win = self.initWindow()
 		self.bin = gtk.Notebook()
 		self.initBin()
-		return
-
-
-	def initMultiple(self):
 		return
 
 
@@ -70,13 +49,42 @@ class Window(object):
 		fullname = "MediaRC"
 		if name:
 			fullname = "%s: %s" % (fullname, name)
-		win = gtk.Window()
-		win.set_title(fullname)
-		win.set_default_size(50, 50)
-		win.set_resizable(True)
-		win.connect("delete_event", self.deleteEventCB)
-		win.show()
+		self.win = gtk.Window()
+		self.win.set_title(fullname)
+		self.win.set_default_size(50, 50)
+		self.win.set_resizable(True)
+		self.top_group = gtk.AccelGroup()
+		self.win.add_accel_group(self.top_group)
+		self.win.connect("delete_event", self.deleteEventCB)
 		self.top_bin = gtk.VBox()
 		self.top_bin.show()
-		win.add(self.top_bin)
-		return win
+		self.win.add(self.top_bin)
+		self.win.show()
+		return
+
+
+	def deleteEventCB(self, widget, event):
+		gtk.main_quit()
+		return False
+
+
+	def addRemote(self, name):
+		remote = Remote(name, self)
+		self.remotes[name] = remote
+		if self.mode == "single":
+			self.bin.attach(remote.frame, self.counter, self.counter + 1,
+								  1, 2)
+			self.counter = self.counter + 1
+		elif self.mode == "tabbed":
+			self.bin.append_page(remote.frame, gtk.Label(name))
+		self.menu.addRemote(name)
+		return remote
+
+
+	def selectRemote(self, name):
+		self.remotes[name].select()
+		return
+
+
+	def selectView(self, name):
+		return
