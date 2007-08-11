@@ -8,11 +8,13 @@ class Remote(object):
 	def __init__(self, name, win, rows=10, cols=10):
 		self.name = name
 		self.win = win
+		self.selected = False
+		self.accels = gtk.AccelGroup()
+		self.win.win.add_accel_group(self.accels)
 		self.table_x = 0
 		self.table_y = 0
 		# Table setup
 		self.table = gtk.Table(rows, cols, False)
-		self.table.set_flags(gtk.CAN_DEFAULT | gtk.CAN_FOCUS)
 		self.table.set_row_spacings(10)
 		self.table.set_border_width(10)
 		self.table.show()
@@ -20,6 +22,7 @@ class Remote(object):
 		self.frame = gtk.Frame(name)
 		self.frame.add(self.table)
 		self.frame.set_label_align(0.5, 0.5)
+		self.unselect()
 		self.frame.show()
 		return
 
@@ -30,13 +33,13 @@ class Remote(object):
 		return
 
 
-	def addButton(self, btn, cb):
-		name = btn.getAttribute("name")
-		xa = btn.getAttribute("colspan")
+	def addButton(self, cfg, cb):
+		name = cfg.getAttribute("name")
+		xa = cfg.getAttribute("colspan")
 		x = [-1, -1]
 		if xa:
 			x = xa.split("-")
-		ya = btn.getAttribute("rowspan")
+		ya = cfg.getAttribute("rowspan")
 		y = [-1, -1]
 		if ya:
 			y = ya.split("-")
@@ -45,9 +48,10 @@ class Remote(object):
 										int(y[0]), int(y[1]))
 		else:
 			button = self.addButtonAuto(name, cb)
-		type = btn.getAttribute("type")
+		type = cfg.getAttribute("type")
 		if type and len(type):
 			self.mapStock(button, type, name)
+		self.setBtnAccel(cfg, button)
 		return button
 
 
@@ -55,7 +59,8 @@ class Remote(object):
 		btn = gtk.Button(name)
 		btn.pyr_name = name
 		btn.connect("clicked", cb)
-		btn.set_focus_on_click(False)
+		btn.set_flags(gtk.CAN_DEFAULT | gtk.CAN_FOCUS)
+		btn.set_focus_on_click(True)
 		self.table.attach(btn, self.table_x, self.table_x + 1, self.table_y,
 						  self.table_y + 1, gtk.FILL, gtk.FILL)
 		self.table_x = self.table_x + 1
@@ -99,6 +104,31 @@ class Remote(object):
 		return slider
 
 
+	def setBtnAccel(self, cfg, btn):
+		from mediarc import interface
+		key = cfg.getAttr("key")
+		type = cfg.getAttr("type")
+		if not key and not type:
+			return
+		if not key:
+			if type in interface.bindings.tmpls.keys():
+				accel = interface.bindings.tmpls[type]
+				str = ""
+				arr = accel.split(".")
+				if len(arr) > 1:
+					if accel.endswith("."):
+						arr.append(".")
+					for word in arr[:-1]:
+						str = "%s<%s>" % (str, word)
+					str = "%s%s" % (str, arr[-1:])
+				else:
+					str = accel
+				(keyval, modifier) = gtk.accelerator_parse(str)
+				btn.add_accelerator("clicked", self.accels, keyval, modifier,
+									gtk.ACCEL_VISIBLE)
+		return
+
+
 	def mapStock(self, btn, type, name):
 		isize = "large"
 		#isize = "small"
@@ -110,22 +140,22 @@ class Remote(object):
 		elif type == "number":
 			img.set_from_file("%s/share/icons/%s/%s.png" % (mediarc.location,
 															isize, name))
-		elif type == "forward":
-			stock = gtk.STOCK_MEDIA_FORWARD
-		elif type == "next":
-			stock = gtk.STOCK_MEDIA_NEXT
 		elif type == "pause":
 			stock = gtk.STOCK_MEDIA_PAUSE
 		elif type == "play":
 			stock = gtk.STOCK_MEDIA_PLAY
-		elif type == "previous":
-			stock = gtk.STOCK_MEDIA_PREVIOUS
-		elif type == "record":
-			stock = gtk.STOCK_MEDIA_RECORD
-		elif type == "rewind":
-			stock = gtk.STOCK_MEDIA_REWIND
 		elif type == "stop":
 			stock = gtk.STOCK_MEDIA_STOP
+		elif type == "record":
+			stock = gtk.STOCK_MEDIA_RECORD
+		elif type == "skipleft":
+			stock = gtk.STOCK_MEDIA_PREVIOUS
+		elif type == "skipright":
+			stock = gtk.STOCK_MEDIA_NEXT
+		elif type == "forward":
+			stock = gtk.STOCK_MEDIA_FORWARD
+		elif type == "rewind":
+			stock = gtk.STOCK_MEDIA_REWIND
 		elif type == "up":
 			stock = gtk.STOCK_GO_UP
 		elif type == "down":
@@ -134,6 +164,9 @@ class Remote(object):
 			stock = gtk.STOCK_GO_BACK
 		elif type == "right":
 			stock = gtk.STOCK_GO_FORWARD
+		elif type == "playpause":
+			img.set_from_file("%s/share/icons/playpause.png" % \
+							  (mediarc.location))
 		elif type == "button":
 			btn.set_image_position(gtk.POS_TOP)
 			label = name
@@ -156,5 +189,14 @@ class Remote(object):
 
 
 	def select(self):
-		self.frame.get_child().grab_focus()
+		self.selected = True
+		self.frame.grab_focus()
+		self.frame.set_shadow_type(gtk.SHADOW_ETCHED_IN)
+		return
+
+
+	def unselect(self):
+		if self.selected:
+			self.selected = False
+			self.frame.set_shadow_type(gtk.SHADOW_NONE)
 		return

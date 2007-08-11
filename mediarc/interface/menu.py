@@ -68,9 +68,9 @@ class Menu(object):
 		return mi
 
 
-	def addRemote(self, name):
+	def addRemote(self, remote):
 		self.remote_count = self.remote_count + 1
-		self.makeItem(name, self.remotes, self.selectRemoteCB, name,
+		self.makeItem(remote.name, self.remotes, self.selectRemoteCB, remote.name,
 					  "F%d" % self.remote_count, self.win.top_group)
 		return
 
@@ -86,6 +86,7 @@ class Menu(object):
 
 
 	def selectRemoteCB(self, menu, name):
+		print "selectRemoteCB", name
 		self.win.selectRemote(name)
 		return
 

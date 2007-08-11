@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mediarc>
+  <!--
+      Key bindings follow the rules of the GTK binding parser with the exception
+      that angle brackets are not used. Separate each word with a period.
+
+      From the PyGTK documentation:
+      The format looks like "<Control>a" or "<Shift><Alt>F1" or "<Release>z" (the
+      last one is for key release). The parser is fairly liberal and allows lower
+      or upper case, and also abbreviations such as "<Ctl>" and "<Ctrl>".
+    -->
+  <bindings>
+    <global>
+      <binding name="quit" key="ctrl.shift.q"/>
+    </global>
+    <remote-template>
+      <binding type="power" key="f12"/>
+      <binding type="skipleft" key="z"/>
+      <binding type="rewind" key="x"/>
+      <binding type="forward" key="c"/>
+      <binding type="skipright" key="v"/>
+      <binding type="playpause" key="space"/>
+      <binding type="stop" key="s"/>
+      <binding type="left" key="left"/>
+      <binding type="right" key="right"/>
+      <binding type="up" key="up"/>
+      <binding type="down" key="down"/>
+    </remote-template>
+  </bindings>
+</mediarc>
