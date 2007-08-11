@@ -38,8 +38,6 @@ class Window(object):
 
 	def initBin(self):
 		self.top_bin.pack_end(self.bin)
-		self.bin.set_flags(gtk.CAN_DEFAULT)
-		self.win.set_default(self.bin)
 		self.bin.set_border_width(10)
 		self.bin.show()
 		return
@@ -77,7 +75,7 @@ class Window(object):
 			self.counter = self.counter + 1
 		elif self.mode == "tabbed":
 			self.bin.append_page(remote.frame, gtk.Label(name))
-		self.menu.addRemote(name)
+		self.menu.addRemote(remote)
 		return remote
 
 

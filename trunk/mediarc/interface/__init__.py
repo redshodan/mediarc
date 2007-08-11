@@ -1,24 +1,27 @@
 import gtk
 from window import Window
+from bindings import Bindings
 
 
 
-_win = None
+win = None
+bindings = None
 
 
 
 def init(config):
-	global _win
-	_win = Window(config)
+	global win, bindings
+	win = Window(config)
+	bindings = Bindings(config)
 	return
 
 
 def addRemote(name):
-	global _win
-	return _win.addRemote(name)
+	global win
+	return win.addRemote(name)
 
 
 def run():
-	_win.win.present()
+	win.win.present()
 	gtk.main()
 	return
