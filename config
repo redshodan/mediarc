@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mediarc>
-
-  <config>
-    <!-- Valid modes are: single, tabbed, multiple -->
-    <window mode="single"/>
-  </config>
-
   <remotes>
     <remote name="Sound" driver="alsa" card="0" >
-      <source name="Master" step="2"/>
+      <source name="Master"/>
       <source name="PCM"/>
       <source name="Line"/>
     </remote>
