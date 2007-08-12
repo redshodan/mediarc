@@ -22,6 +22,7 @@ def addRemote(name):
 
 
 def run():
+	win.win.show()
 	win.win.present()
 	gtk.main()
 	return

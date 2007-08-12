@@ -8,7 +8,8 @@ class Remote(object):
 	def __init__(self, name, win, rows=10, cols=10):
 		self.name = name
 		self.win = win
-		self.selected = False
+		self.defwidget = None
+		self.selected = True
 		self.accels = gtk.AccelGroup()
 		self.win.win.add_accel_group(self.accels)
 		self.table_x = 0
@@ -22,7 +23,7 @@ class Remote(object):
 		self.frame = gtk.Frame(name)
 		self.frame.add(self.table)
 		self.frame.set_label_align(0.5, 0.5)
-		self.unselect()
+		self.frame.set_shadow_type(gtk.SHADOW_NONE)
 		self.frame.show()
 		return
 
@@ -52,6 +53,8 @@ class Remote(object):
 		if type and len(type):
 			self.mapStock(button, type, name)
 		self.setBtnAccel(cfg, button)
+		if not self.defwidget:
+			self.defwidget = button
 		return button
 
 
@@ -86,6 +89,24 @@ class Remote(object):
 		return btn
 
 
+	def setBtnAccel(self, cfg, btn):
+		from mediarc import interface
+		key = cfg.getAttr("key")
+		type = cfg.getAttr("type")
+		accel = None
+		if not key and not type:
+			return
+		elif not key and type in interface.bindings.tmpls.keys():
+			accel = interface.bindings.tmpls[type]
+		elif key:
+			accel = key
+		if accel:
+			(keyval, modifier) = gtk.accelerator_parse(accel)
+			btn.add_accelerator("clicked", self.accels, keyval, modifier,
+								gtk.ACCEL_VISIBLE)
+		return
+
+
 	def addSlider(self, name, cb):
 		adj = gtk.Adjustment(0, 0, 100, 1, 5, 0)
 		slider = gtk.VScale(adj)
@@ -101,45 +122,20 @@ class Remote(object):
 		slider.pyr_name = name
 		slider.pyr_idx = self.table_x
 		self.table_x = self.table_x + 1
+		if not self.defwidget:
+			self.defwidget = slider
 		return slider
 
 
-	def setBtnAccel(self, cfg, btn):
-		from mediarc import interface
-		key = cfg.getAttr("key")
-		type = cfg.getAttr("type")
-		if not key and not type:
-			return
-		if not key:
-			if type in interface.bindings.tmpls.keys():
-				accel = interface.bindings.tmpls[type]
-				str = ""
-				arr = accel.split(".")
-				if len(arr) > 1:
-					if accel.endswith("."):
-						arr.append(".")
-					for word in arr[:-1]:
-						str = "%s<%s>" % (str, word)
-					str = "%s%s" % (str, arr[-1:])
-				else:
-					str = accel
-				(keyval, modifier) = gtk.accelerator_parse(str)
-				btn.add_accelerator("clicked", self.accels, keyval, modifier,
-									gtk.ACCEL_VISIBLE)
-		return
-
-
 	def mapStock(self, btn, type, name):
-		isize = "large"
-		#isize = "small"
 		stock = None
 		img = gtk.Image()
 		label = ""
 		if type == "power":
 			return
 		elif type == "number":
-			img.set_from_file("%s/share/icons/%s/%s.png" % (mediarc.location,
-															isize, name))
+			img.set_from_file("%s/share/icons/%s/%s.png" % \
+							  (mediarc.location, self.win.icons_size, name))
 		elif type == "pause":
 			stock = gtk.STOCK_MEDIA_PAUSE
 		elif type == "play":
@@ -188,15 +184,19 @@ class Remote(object):
 		return
 
 
-	def select(self):
-		self.selected = True
-		self.frame.grab_focus()
-		self.frame.set_shadow_type(gtk.SHADOW_ETCHED_IN)
+	def select(self, force=False):
+		if not self.selected or force:
+			self.selected = True
+			self.win.win.add_accel_group(self.accels)
+			self.frame.set_shadow_type(gtk.SHADOW_ETCHED_IN)
+			if self.defwidget:
+				self.defwidget.grab_focus()
 		return
 
 
-	def unselect(self):
-		if self.selected:
+	def unselect(self, force=False):
+		if self.selected or force:
 			self.selected = False
+			self.win.win.remove_accel_group(self.accels)
 			self.frame.set_shadow_type(gtk.SHADOW_NONE)
 		return
