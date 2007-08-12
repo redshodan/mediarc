@@ -13,6 +13,7 @@ def init(config):
 	global win, bindings
 	win = Window(config)
 	bindings = Bindings(config)
+	win.initMenu()
 	return
 
 

@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mediarc>
   <!--
-      Key bindings follow the rules of the GTK binding parser. From the PyGTK
-      documentation:
+      Key bindings follow the rules of the GTK binding parser. Angle brackets
+      must be escaped according to the XML rules.
+      
+      <   is   &lt;
+      >   is   &gt;
+
+      From the PyGTK documentation:
       The format looks like "<Control>a" or "<Shift><Alt>F1" or "<Release>z"
       (the last one is for key release). The parser is fairly liberal and
       allows lower or upper case, and also abbreviations such as "<Ctl>" and
       "<Ctrl>".
     -->
   <bindings>
-    <global>
-      <binding name="quit" key="ctrl.shift.q"/>
-    </global>
+    <menu>
+      <binding type="Exit" key="&lt;ctrl&gt;q"/>
+      <binding type="Single" key="&lt;ctrl&gt;s"/>
+      <binding type="Tabbed" key="&lt;ctrl&gt;t"/>
+      <binding type="Multiple" key="&lt;ctrl&gt;m"/>
+    </menu>
     <remote-template>
       <binding type="power" key="F12"/>
       <binding type="skipleft" key="z"/>
