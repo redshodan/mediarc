@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mediarc>
+
+  <tv name="TV" remote="TV" snd-remote="Sound">
+    <input name="MythTV" cmd="hdmi" snd-src="Line"/>
+    <input name="DVD" cmd="component" snd-src="Line" remote="DVD"/>
+    <input name="TV" cmd="tv" snd-src="Line" remote="Cable"/>
+    <input name="PS2" cmd="composite" snd-src="Line"/>
+  </tv>
+
   <remotes>
     <remote name="Sound" driver="alsa" card="0" >
       <source name="Master"/>

@@ -1,7 +1,6 @@
 import gtk
 from remote import Remote
 from mediarc.interface.menu import Menu
-from mediarc.interface.statusicon import StatusIcon
 
 
 
@@ -14,11 +13,6 @@ class Window(object):
 		self.win_mode = "single"
 		self.loadConfig()
 		self.initWindow()
-		if self.win_mode == "single":
-			self.initSingle()
-		elif self.win_mode == "tabbed":
-			self.initTabbed()
-		self.status_icon = StatusIcon(cfg, self)
 		return
 
 
@@ -29,6 +23,14 @@ class Window(object):
 		win = self.cfg.getElem("config/window")
 		if win and win.getAttr("mode"):
 			self.win_mode = win.getAttr("mode")
+		return
+
+
+	def initRemotes(self):
+		if self.win_mode == "single":
+			self.initSingle()
+		elif self.win_mode == "tabbed":
+			self.initTabbed()
 		return
 
 

@@ -2,11 +2,17 @@ import alsa, lirc, serial
 
 
 
+remotes = {}
+
+
+
 def init(cfg):
+	global remotes
 	for mod in [alsa, lirc, serial]:
 		mod.init(cfg)
 	for elem in cfg.getElems("remotes/remote"):
-		load(elem)
+		remote = load(elem)
+		remotes[remote.name] = remote
 	return
 
 
@@ -23,4 +29,4 @@ def load(cfg):
 		return serial.new(cfg)
 	else:
 		raise Exception("Invalid remote driver: %s" % driver)
-	return
+	return None

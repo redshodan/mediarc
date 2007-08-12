@@ -134,6 +134,7 @@ class ALSA(object):
 			self.name = "card%s" % self.card
 		self.ui = interface.addRemote(self.name)
 		self.ctls = {}
+		self.cur = None
 		sources = cfg.getElems("source")
 		self.ui.table.resize(len(sources), 1)
 		for source in sources:
@@ -142,9 +143,31 @@ class ALSA(object):
 			if not step:
 				step = 2
 			print "adding", name, "step", step
-			self.ctls[name] = Control(name, step, self.ui, self.card)
+			ctl = Control(name, step, self.ui, self.card)
+			self.ctls[name] = ctl
+			if not self.cur:
+				self.cur = ctl
 		return
 
+
+	def setCurSrc(self, name):
+		self.cur = self.ctls[name]
+		return
+
+
+	def incCurSrc(self):
+		self.cur.slider.emit("move-slider", gtk.SCROLL_STEP_UP)
+		return
+
+
+	def decCurSrc(self):
+		self.cur.slider.emit("move-slider", gtk.SCROLL_STEP_DOWN)
+		return
+
+
+	def toggleCurSrcMute(self):
+		self.cur.btn.emit("clicked")
+		return
 
 
 

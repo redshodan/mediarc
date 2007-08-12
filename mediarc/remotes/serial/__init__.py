@@ -28,6 +28,7 @@ class Serial(object):
 		except Exception, e:
 			print "For remote %s, failed to initialize serial device: %s" % \
 				  (self.name, str(e))
+		self.btns = {}
 		self.loadUI()
 		return
 
@@ -49,6 +50,7 @@ class Serial(object):
 							  (cmd, button.pyr_name)
 					else:
 						button.pyr_cmds.append(cmd)
+						self.btns[button.pyr_name] = button
 			self.ui.addRow()
 		return
 
@@ -59,6 +61,13 @@ class Serial(object):
 			self.driver.send(cmd)
 		if not len(button.pyr_cmds):
 			print "Error. Button %s had no command set" % button.pyr_name
+		return
+
+
+	def doCmd(self, cmdstr):
+		print "Serial doCmd:", cmdstr
+		cmd = self.driver.getBtnCmds(cmdstr)
+		self.driver.send(cmd)
 		return
 
 
