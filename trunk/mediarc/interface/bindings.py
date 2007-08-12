@@ -1,4 +1,3 @@
-import gtk
 import mediarc
 from mediarc import mydom
 
