@@ -45,38 +45,33 @@ class Remote(object):
 		y = [-1, -1]
 		if ya:
 			y = ya.split("-")
-		if xa or ya:
-			button = self.addButtonFull(name, cb, int(x[0]), int(x[1]),
-										int(y[0]), int(y[1]))
-		else:
-			button = self.addButtonAuto(name, cb)
-		type = cfg.getAttribute("type")
-		if type and len(type):
-			self.mapStock(button, type, name)
-		self.setBtnAccel(cfg, button)
-		if not self.defwidget:
-			self.defwidget = button
-		return button
-
-
-	def addButtonAuto(self, name, cb):
 		btn = gtk.Button(name)
 		btn.pyr_name = name
-		btn.connect("clicked", cb)
-		btn.set_flags(gtk.CAN_DEFAULT | gtk.CAN_FOCUS)
-		btn.set_focus_on_click(True)
-		self.table.attach(btn, self.table_x, self.table_x + 1, self.table_y,
-						  self.table_y + 1, gtk.FILL, gtk.FILL)
-		self.table_x = self.table_x + 1
+		btn.connect("clicked", self.buttonWrapperCB, cb)
+		if xa or ya:
+			self.addButtonFull(btn, int(x[0]), int(x[1]), int(y[0]),
+										int(y[1]))
+		else:
+			self.addButtonAuto(btn)
+		type = cfg.getAttribute("type")
+		if type and len(type):
+			self.mapStock(btn, type, name)
+		self.setBtnAccel(cfg, btn)
+		if not self.defwidget:
+			self.defwidget = btn
 		btn.show()
 		return btn
 
 
-	def addButtonFull(self, name, cb, x1, x2, y1=-1, y2=-1, xop=gtk.FILL,
+	def addButtonAuto(self, btn):
+		self.table.attach(btn, self.table_x, self.table_x + 1, self.table_y,
+						  self.table_y + 1, gtk.FILL, gtk.FILL)
+		self.table_x = self.table_x + 1
+		return
+
+
+	def addButtonFull(self, btn, x1, x2, y1=-1, y2=-1, xop=gtk.FILL,
 					  yop=gtk.FILL):
-		btn = gtk.Button(name)
-		btn.pyr_name = name
-		btn.connect("clicked", cb)
 		if x1 == -1:
 			x1 = self.table_x
 			x2 = self.table_x + 1
@@ -86,8 +81,7 @@ class Remote(object):
 		self.table.attach(btn, x1, x2, y1, y2, xop, yop)
 		self.table_x = x2
 		self.table_y = y1
-		btn.show()
-		return btn
+		return
 
 
 	def setBtnAccel(self, cfg, btn):
@@ -100,7 +94,7 @@ class Remote(object):
 			return
 		elif not key and ttype in interface.bindings.tmpls.keys():
 			accel = interface.bindings.tmpls[ttype]
-			if type(accel) == types.DictionaryType:
+			if type(accel) == types.DictionaryType and name:
 				accel = accel[name]
 		elif key:
 			accel = key
@@ -109,6 +103,11 @@ class Remote(object):
 			btn.add_accelerator("clicked", self.accels, keyval, modifier,
 								gtk.ACCEL_VISIBLE)
 		return
+
+
+	def buttonWrapperCB(self, btn, usercb):
+		btn.grab_focus()
+		return usercb(btn)
 
 
 	def addSlider(self, name, cb):

@@ -18,7 +18,6 @@ class Window(object):
 			self.initSingle()
 		elif self.win_mode == "tabbed":
 			self.initTabbed()
-		self.menu = Menu(cfg, self)
 		self.status_icon = StatusIcon(cfg, self)
 		return
 
@@ -69,6 +68,11 @@ class Window(object):
 		self.top_bin = gtk.VBox()
 		self.top_bin.show()
 		self.win.add(self.top_bin)
+		return
+
+
+	def initMenu(self):
+		self.menu = Menu(self.cfg, self)
 		return
 
 

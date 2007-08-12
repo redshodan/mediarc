@@ -9,7 +9,7 @@ class Bindings(object):
 		self.cfg = cfg
 		path = "%s/share/config/bindings.xml" % (mediarc.location)
 		self.defcfg = mydom.readNew(path)
-		self.globl = {}
+		self.menu = {}
 		self.tmpls = {}
 		self.load(self.defcfg)
 		self.load(self.cfg)
@@ -17,9 +17,9 @@ class Bindings(object):
 
 
 	def load(self, cfg):
-		globl = cfg.getElem("bindings/global")
-		if globl:
-			self.loadInto(globl, self.globl)
+		menu = cfg.getElem("bindings/menu")
+		if menu:
+			self.loadInto(menu, self.menu)
 		tmpls = cfg.getElem("bindings/remote-template")
 		if tmpls:
 			self.loadInto(tmpls, self.tmpls)
@@ -38,4 +38,3 @@ class Bindings(object):
 			else:
 				map[type] = key
 		return
-
