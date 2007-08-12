@@ -30,6 +30,12 @@ class Bindings(object):
 		for binding in cfg.getElems("binding"):
 			type = binding.getAttr("type")
 			key = binding.getAttr("key")
-			map[type] = key
+			name = binding.getAttr("name")
+			if name:
+				if not type in map.keys():
+					map[type] = {}
+				map[type][name] = key
+			else:
+				map[type] = key
 		return
 

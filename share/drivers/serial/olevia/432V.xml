@@ -104,7 +104,7 @@
       </row>
       <row>
         <button name="source" type="button"><command name="source"/></button>
-        <button name="down" type="down" key="g"><command name="down"/></button>
+        <button name="down" type="down"><command name="down"/></button>
         <button name="display" type="button"><command name="display"/></button>
       </row>
     </buttons>

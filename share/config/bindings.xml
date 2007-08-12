@@ -19,11 +19,23 @@
       <binding type="forward" key="c"/>
       <binding type="skipright" key="v"/>
       <binding type="playpause" key="Space"/>
-      <binding type="stop" key="s"/>
-      <binding type="left" key="Left"/>
-      <binding type="right" key="Right"/>
-      <binding type="up" key="Up"/>
-      <binding type="down" key="Down"/>
+      <binding type="play" key="a"/>
+      <binding type="pause" key="s"/>
+      <binding type="stop" key="d"/>
+      <binding type="left" key="&lt;ctrl&gt;Left"/>
+      <binding type="right" key="&lt;ctrl&gt;Right"/>
+      <binding type="up" key="&lt;ctrl&gt;Up"/>
+      <binding type="down" key="&lt;ctrl&gt;Down"/>
+      <binding type="number" name="1" key="1"/>
+      <binding type="number" name="2" key="2"/>
+      <binding type="number" name="3" key="3"/>
+      <binding type="number" name="4" key="4"/>
+      <binding type="number" name="5" key="5"/>
+      <binding type="number" name="6" key="6"/>
+      <binding type="number" name="7" key="7"/>
+      <binding type="number" name="8" key="8"/>
+      <binding type="number" name="9" key="9"/>
+      <binding type="number" name="0" key="0"/>
     </remote-template>
   </bindings>
 </mediarc>
