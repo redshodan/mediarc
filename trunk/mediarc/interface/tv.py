@@ -41,6 +41,10 @@ class TV(object):
 		self.inputs[input.name] = input
 		btn = gtk.ToolButton(None, input.name)
 		btn.connect("clicked", self.inputCB, input)
+		if input.key:
+			(keyval, modifier) = gtk.accelerator_parse(input.key)
+			btn.add_accelerator("clicked", self.win.top_group, keyval, modifier,
+								gtk.ACCEL_VISIBLE)
 		btn.show()
 		self.bar.insert(btn, -1)
 		return
@@ -50,23 +54,15 @@ class TV(object):
 		print "inputCB", input.name
 		from mediarc.remotes import remotes
 		remote = remotes[self.remote]
-		#remote.doCmd(input.cmd)
+		remote.doCmd(input.cmd)
 		snd_remote = None
-		try:
-			if getattr(self, "snd-remote"):
-				snd_remote = remotes[getattr(self, "snd-remote")]
-		except: pass
-		try:
-			if getattr(input, "snd-remote"):
-				snd_remote = remotes[getattr(input, "snd-remote")]
-		except: pass
-		try:
-			if getattr(input, "snd-src"):
-				snd_remote.setCurSrc(getattr(input, "snd-src"))
-		except: pass
-		try:
-			if input.remote:
-				remote = remotes[input.remote]
-		except: pass
+		if getattr(self, "snd-remote"):
+			snd_remote = remotes[getattr(self, "snd-remote")]
+		if getattr(input, "snd-remote"):
+			snd_remote = remotes[getattr(input, "snd-remote")]
+		if getattr(input, "snd-src"):
+			snd_remote.setCurSrc(getattr(input, "snd-src"))
+		if input.remote:
+			remote = remotes[input.remote]
 		self.win.selectRemote(remote.name)
 		return

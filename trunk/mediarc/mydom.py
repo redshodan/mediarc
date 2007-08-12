@@ -188,6 +188,8 @@ def pullAttrs(self, obj, names):
 	for name in names:
 		if self.getAttr(name):
 			setattr(obj, name, self.getAttr(name))
+		else:
+			setattr(obj, name, None)
 	return
 
 
