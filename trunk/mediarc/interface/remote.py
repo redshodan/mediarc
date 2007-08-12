@@ -1,3 +1,4 @@
+import types
 import gtk, gobject
 import mediarc
 
@@ -92,12 +93,15 @@ class Remote(object):
 	def setBtnAccel(self, cfg, btn):
 		from mediarc import interface
 		key = cfg.getAttr("key")
-		type = cfg.getAttr("type")
+		ttype = cfg.getAttr("type")
+		name = cfg.getAttr("name")
 		accel = None
-		if not key and not type:
+		if not key and not ttype:
 			return
-		elif not key and type in interface.bindings.tmpls.keys():
-			accel = interface.bindings.tmpls[type]
+		elif not key and ttype in interface.bindings.tmpls.keys():
+			accel = interface.bindings.tmpls[ttype]
+			if type(accel) == types.DictionaryType:
+				accel = accel[name]
 		elif key:
 			accel = key
 		if accel:
