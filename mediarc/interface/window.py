@@ -9,6 +9,8 @@ class Window(object):
 	def __init__(self, cfg):
 		self.cfg = cfg
 		self.remotes = {}
+		self.cur_remote = None
+		self.cur_snd_remote = None
 		self.icons_size = "large"
 		self.win_mode = "single"
 		self.loadConfig()
@@ -93,6 +95,7 @@ class Window(object):
 			self.bin.append_page(remote.frame, gtk.Label(name))
 		self.menu.addRemote(remote)
 		if not len(self.remotes):
+			self.cur_remote = remote
 			self.defremote = remote
 		self.remotes[name] = remote
 		return remote
@@ -101,7 +104,13 @@ class Window(object):
 	def selectRemote(self, name):
 		for remote in self.remotes.itervalues():
 			remote.unselect()
-		self.remotes[name].select()
+		self.cur_remote = self.remotes[name]
+		self.cur_remote.select()
+		return
+
+
+	def selectSndRemote(self, name):
+		self.cur_snd_remote = self.remotes[name]
 		return
 
 

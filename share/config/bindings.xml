@@ -20,6 +20,12 @@
       <binding type="Tabbed" key="&lt;ctrl&gt;t"/>
       <binding type="Multiple" key="&lt;ctrl&gt;m"/>
     </menu>
+    <toolbar>
+      <binding type="context-left" key="&lt;shift&gt;Left"/>
+      <binding type="context-right" key="&lt;shift&gt;Right"/>
+      <binding type="context-up" key="&lt;shift&gt;Up"/>
+      <binding type="context-down" key="&lt;shift&gt;Down"/>
+    </toolbar>
     <remote-template>
       <binding type="power" key="F12"/>
       <binding type="skipleft" key="z"/>
@@ -34,6 +40,7 @@
       <binding type="right" key="&lt;ctrl&gt;Right"/>
       <binding type="up" key="&lt;ctrl&gt;Up"/>
       <binding type="down" key="&lt;ctrl&gt;Down"/>
+      <binding type="number" name="0" key="0"/>
       <binding type="number" name="1" key="1"/>
       <binding type="number" name="2" key="2"/>
       <binding type="number" name="3" key="3"/>
@@ -43,7 +50,6 @@
       <binding type="number" name="7" key="7"/>
       <binding type="number" name="8" key="8"/>
       <binding type="number" name="9" key="9"/>
-      <binding type="number" name="0" key="0"/>
     </remote-template>
   </bindings>
 </mediarc>

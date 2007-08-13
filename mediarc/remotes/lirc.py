@@ -27,12 +27,22 @@ class LIRC(object):
 
 
 	def buttonCB(self, button):
+		self.doCmd(button.pyr_name)
+		return
+
+
+	def doCmd(self, cmdstr):
+		print "lirc doCmd:", cmdstr
 		global lirc_sock
 		cmd = self.cmd.replace("%n", self.id)
-		cmd = cmd.replace("%v", button.pyr_name)
-		print "LIRC callback %s, running: %s" % (button.pyr_name, cmd)
+		cmd = cmd.replace("%v", cmdstr)
+		print "LIRC command %s, running: %s" % (cmdstr, cmd)
 		lirc_sock.send(cmd + "\n")
 		return False
+
+
+	def doContextArrow(self, name):
+		return
 
 
 

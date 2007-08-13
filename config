@@ -2,12 +2,10 @@
 <mediarc>
 
   <tv name="TV" remote="TV" snd-remote="Sound">
-    <input name="MythTV" cmd="hdmi" snd-src="Line" key="&lt;ctl&gt;F1"/>
-    <input name="TV" cmd="tv" snd-src="Line" remote="Cable"
-           key="&lt;ctl&gt;F2"/>
-    <input name="DVD" cmd="component" snd-src="Line" remote="DVD"
-           key="&lt;ctl&gt;F3"/>
-    <input name="PS2" cmd="composite" snd-src="Line" key="&lt;ctl&gt;F4"/>
+    <input name="MythTV" cmd="hdmi" snd-src="Line" key="F1"/>
+    <input name="TV" cmd="tv" snd-src="Line" remote="Cable" key="F2"/>
+    <input name="DVD" cmd="component" snd-src="Line" remote="DVD" key="F3"/>
+    <input name="PS2" cmd="composite" snd-src="Line" key="F4"/>
   </tv>
 
   <remotes>

@@ -170,6 +170,10 @@ class ALSA(object):
 		return
 
 
+	def doContextArrow(self, name):
+		return
+
+
 
 def init(cfg):
 	return

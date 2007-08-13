@@ -9,6 +9,7 @@ class Bindings(object):
 		path = "%s/share/config/bindings.xml" % (mediarc.location)
 		self.defcfg = mydom.readNew(path)
 		self.menu = {}
+		self.toolbar = {}
 		self.tmpls = {}
 		self.load(self.defcfg)
 		self.load(self.cfg)
@@ -19,6 +20,9 @@ class Bindings(object):
 		menu = cfg.getElem("bindings/menu")
 		if menu:
 			self.loadInto(menu, self.menu)
+		toolbar = cfg.getElem("bindings/toolbar")
+		if toolbar:
+			self.loadInto(toolbar, self.toolbar)
 		tmpls = cfg.getElem("bindings/remote-template")
 		if tmpls:
 			self.loadInto(tmpls, self.tmpls)
