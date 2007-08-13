@@ -67,7 +67,7 @@ class Menu(object):
 	def addRemote(self, remote):
 		self.remote_count = self.remote_count + 1
 		self.makeItem(remote.name, self.remotes, self.selectRemoteCB,
-					  remote.name, "F%d" % self.remote_count)
+					  remote.name, "<shift>F%d" % self.remote_count)
 		return
 
 
