@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mediarc>
 
+  <config>
+    <ctl address="localhost" port="2424"/>
+  </config>
+
   <tv name="TV" remote="TV" snd-remote="Sound">
-    <input name="MythTV" cmd="hdmi" snd-src="Line" key="F1"/>
+    <input name="MythTV" cmd="hdmi" snd-src="PCM" key="F1"/>
     <input name="TV" cmd="tv" snd-src="Line" remote="Cable" key="F2"/>
     <input name="DVD" cmd="component" snd-src="Line" remote="DVD" key="F3"/>
     <input name="PS2" cmd="composite" snd-src="Line" key="F4"/>
@@ -11,6 +15,32 @@
   <remotes>
     <remote name="TV" driver="serial" manufacturer="olevia" model="432V" 
             device="/dev/ttyS0"/>
+
+    <remote name="Cable" driver="lirc" id="cable">
+      <buttons rows="2" cols="3">
+        <row>
+          <button name="power" type="power" colspan="0-3" rowspan="0-1"/>
+        </row>
+        <row>
+          <button name="1" type="number"/>
+          <button name="2" type="number"/>
+          <button name="3" type="number"/>
+        </row>
+        <row>
+          <button name="4" type="number"/>
+          <button name="5" type="number"/>
+          <button name="6" type="number"/>
+        </row>
+        <row>
+          <button name="7" type="number"/>
+          <button name="8" type="number"/>
+          <button name="9" type="number"/>
+        </row>
+        <row>
+          <button name="0" type="number" colspan="1-2"/>
+        </row>
+      </buttons>
+    </remote>
 
     <remote name="DVD" driver="lirc" id="dvd">
       <buttons>
@@ -38,39 +68,13 @@
         </row>
         <row>
           <button name="left" type="left" colspan="1-3"/>
-          <button name="enter" colspan="3-5"/>
+          <button name="enter" colspan="3-5" key="l"/>
           <button name="right" type="right" colspan="5-7"/>
         </row>
         <row>
           <button name="display" type="button" colspan="1-3"/>
           <button name="down" type="down" colspan="3-5"/>
           <button name="return" type="button" colspan="5-7"/>
-        </row>
-      </buttons>
-    </remote>
-
-    <remote name="Cable" driver="lirc" id="cable">
-      <buttons rows="2" cols="3">
-        <row>
-          <button name="power" type="power" colspan="0-3" rowspan="0-1"/>
-        </row>
-        <row>
-          <button name="1" type="number"/>
-          <button name="2" type="number"/>
-          <button name="3" type="number"/>
-        </row>
-        <row>
-          <button name="4" type="number"/>
-          <button name="5" type="number"/>
-          <button name="6" type="number"/>
-        </row>
-        <row>
-          <button name="7" type="number"/>
-          <button name="8" type="number"/>
-          <button name="9" type="number"/>
-        </row>
-        <row>
-          <button name="0" type="number" colspan="1-2"/>
         </row>
       </buttons>
     </remote>

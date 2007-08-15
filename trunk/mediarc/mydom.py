@@ -108,6 +108,16 @@ def getAttr(self, attr):
 	return self.root().getAttribute(attr)
 
 
+def getAttrInt(self, attr):
+	val = self.root().getAttribute(attr)
+	if val:
+		try:
+			return int(val)
+		except:
+			return None
+	return None
+
+
 # Get first child element of this node, or by path from this node
 def getElem(self, path = None):
 	elems = self.root().getElems(path)
@@ -439,6 +449,7 @@ def injectFuncs(elem):
 	inject(elem, instName)
 	inject(elem, setAttr)
 	inject(elem, getAttr)
+	inject(elem, getAttrInt)
 	inject(elem, pullAttrs)
 	inject(elem, toStrElem, "toStr")
 
