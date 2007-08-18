@@ -6,8 +6,9 @@ import mediarc
 
 class Remote(object):
 
-	def __init__(self, name, win, rows=10, cols=10):
+	def __init__(self, name, type, win, rows=10, cols=10):
 		self.name = name
+		self.type = type
 		self.win = win
 		self.defwidget = None
 		self.selected = True
@@ -22,10 +23,17 @@ class Remote(object):
 		self.table.show()
 		# Frame setup
 		self.frame = gtk.Frame(name)
-		self.frame.add(self.table)
 		self.frame.set_label_align(0.5, 0.5)
 		self.frame.set_shadow_type(gtk.SHADOW_NONE)
 		self.frame.show()
+		self.ebox = gtk.EventBox()
+		if type == "sound":
+			self.ebox.set_name("remote-ctl-snd")
+		else:
+			self.ebox.set_name("remote-ctl")
+		self.ebox.add(self.table)
+		self.ebox.show()
+		self.frame.add(self.ebox)
 		return
 
 
@@ -137,6 +145,8 @@ class Remote(object):
 		if type == "power":
 			return
 		elif type == "number":
+			btn.set_label(" %s " % name)
+			return
 			img.set_from_file("%s/share/icons/%s/%s.png" % \
 							  (mediarc.location, self.win.icons_size, name))
 		elif type == "pause":
@@ -167,6 +177,7 @@ class Remote(object):
 			img.set_from_file("%s/share/icons/playpause.png" % \
 							  (mediarc.location))
 		elif type == "button":
+			return
 			btn.set_image_position(gtk.POS_TOP)
 			label = name
 			img.set_from_file("%s/share/icons/btn.png" % (mediarc.location))

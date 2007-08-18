@@ -132,7 +132,7 @@ class ALSA(object):
 		cfg.pullAttrs(self, ["name", "card"])
 		if not self.name:
 			self.name = "card%s" % self.card
-		self.ui = interface.addRemote(self.name)
+		self.ui = interface.addRemote(self.name, "sound")
 		self.ctls = {}
 		self.cur = None
 		sources = cfg.getElems("source")
