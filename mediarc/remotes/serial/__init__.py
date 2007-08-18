@@ -34,7 +34,7 @@ class Serial(object):
 
 
 	def loadUI(self):
-		self.ui = interface.addRemote(self.name)
+		self.ui = interface.addRemote(self.name, "normal")
 		cfg = self.cfg
 		buttons = cfg.getElem("buttons")
 		if not buttons:

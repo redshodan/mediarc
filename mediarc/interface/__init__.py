@@ -1,4 +1,5 @@
 import gtk
+import mediarc
 from window import Window
 from bindings import Bindings
 from tv import TV
@@ -26,9 +27,9 @@ def init(cfg):
 	return
 
 
-def addRemote(name):
+def addRemote(name, type):
 	global win
-	return win.addRemote(name)
+	return win.addRemote(name, type)
 
 
 def run():

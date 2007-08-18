@@ -18,7 +18,7 @@ class LIRC(object):
 			self.cmd = cfg.get("command")
 		else:
 			self.cmd = "SEND_ONCE %n %v"
-		self.ui = interface.addRemote(self.name)
+		self.ui = interface.addRemote(self.name, "normal")
 		for row in cfg.getElems("buttons/row"):
 			for btn in row.getElems("button"):
 				self.ui.addButton(btn, self.buttonCB)

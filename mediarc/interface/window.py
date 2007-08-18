@@ -85,8 +85,8 @@ class Window(object):
 		return False
 
 
-	def addRemote(self, name):
-		remote = Remote(name, self)
+	def addRemote(self, name, type):
+		remote = Remote(name, type, self)
 		if self.win_mode == "single":
 			self.bin.attach(remote.frame, self.counter, self.counter + 1,
 								  1, 2)
