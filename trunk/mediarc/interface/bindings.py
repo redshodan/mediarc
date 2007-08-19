@@ -6,7 +6,7 @@ from mediarc import mydom
 class Bindings(object):
 	def __init__(self, cfg):
 		self.cfg = cfg
-		path = "%s/share/config/bindings.xml" % (mediarc.location)
+		path = "%s/config/bindings.xml" % (mediarc.location)
 		self.defcfg = mydom.readNew(path)
 		self.menu = {}
 		self.toolbar = {}

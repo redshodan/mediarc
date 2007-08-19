@@ -71,7 +71,7 @@ class Driver(object):
 
 
 def load(manufacturer, model):
-	path = "%s/share/drivers/serial/%s/%s.xml" % \
+	path = "%s/drivers/serial/%s/%s.xml" % \
 		   (mediarc.location, manufacturer, model)
 	cfg = mydom.readNew(path)
 	return Driver(cfg.getElem("driver"))

@@ -151,7 +151,7 @@ class Remote(object):
 		elif type == "number":
 			btn.set_label(" %s " % name)
 			return
-			img.set_from_file("%s/share/icons/%s/%s.png" % \
+			img.set_from_file("%s/icons/%s/%s.png" % \
 							  (mediarc.location, self.win.icons_size, name))
 		elif type == "pause":
 			stock = gtk.STOCK_MEDIA_PAUSE
@@ -178,13 +178,13 @@ class Remote(object):
 		elif type == "right":
 			stock = gtk.STOCK_GO_FORWARD
 		elif type == "playpause":
-			img.set_from_file("%s/share/icons/playpause.png" % \
+			img.set_from_file("%s/icons/playpause.png" % \
 							  (mediarc.location))
 		elif type == "button":
 			return
 			btn.set_image_position(gtk.POS_TOP)
 			label = name
-			img.set_from_file("%s/share/icons/btn.png" % (mediarc.location))
+			img.set_from_file("%s/icons/btn.png" % (mediarc.location))
 		elif type == "plus":
 			btn.set_image_position(gtk.POS_TOP)
 			label = name

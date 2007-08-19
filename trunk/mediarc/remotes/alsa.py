@@ -116,11 +116,11 @@ class Control(object):
 	def updateBtn(self):
 		if self.left[1] == "off":
 			img = gtk.Image()
-			img.set_from_file(mediarc.location + "/share/icons/muted.png")
+			img.set_from_file(mediarc.location + "/icons/muted.png")
 			self.btn.set_image(img)
 		else:
 			img = gtk.Image()
-			img.set_from_file(mediarc.location + "/share/icons/unmuted.png")
+			img.set_from_file(mediarc.location + "/icons/unmuted.png")
 			self.btn.set_image(img)
 		return
 

@@ -50,7 +50,7 @@ def init(cfg):
 	global lirc_sock
 	scfg = cfg.getElem("drivers/driver=lirc")
 	if not scfg:
-		path = "%s/share/drivers/lirc.xml" % (mediarc.location)
+		path = "%s/drivers/lirc.xml" % (mediarc.location)
 		cfg = mydom.readNew(path)
 		scfg = cfg.getElem("driver")
 	sname = scfg.getAttr("socket")
