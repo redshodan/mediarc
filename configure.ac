@@ -35,5 +35,10 @@ AS_AC_EXPAND(DOCDIR, "${DOCDIR}")
 AC_CONFIG_FILES([ 
 	Makefile
     bin/mediarc
-], [chmod +x bin/mediarc])
+    config/Makefile
+    drivers/Makefile
+    icons/Makefile
+    mediarc/Makefile
+    themes/Makefile
+], [[[ -f bin/mediarc ]] && chmod +x bin/mediarc])
 AC_OUTPUT
