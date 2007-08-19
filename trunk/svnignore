@@ -10,3 +10,4 @@ missing
 svnignore
 aclocal.m4
 install-sh
+Makefile
