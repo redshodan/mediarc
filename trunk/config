@@ -41,6 +41,36 @@
         <row>
           <button name="0" type="number" colspan="1-2"/>
         </row>
+        <row>
+          <button name="vol" id="volup" type="plus"/>
+          <button name="mute" type="button"/>
+          <button name="ch" id="channelup" type="plus"/>
+        </row>
+        <row>
+          <button name="vol" id="voldown" type="minus"/>
+          <button name="fav" type="button"/>
+          <button name="ch" id="channeldown" type="minus"/>
+        </row>
+        <row>
+          <button name="page" id="pageup" type="plus"/>
+          <button name="up" type="up"/>
+          <button name="page" id="pagedown" type="minus"/>
+        </row>
+        <row>
+          <button name="left" type="left"/>
+          <button name="enter" id="select"/>
+          <button name="right" type="right"/>
+        </row>
+        <row>
+          <button name="guide" type="button"/>
+          <button name="down" type="down"/>
+          <button name="menu" type="button"/>
+        </row>
+        <row>
+          <button name="exit" type="button"/>
+          <button name="info" type="button"/>
+          <button name="last" type="button"/>
+        </row>
       </buttons>
     </remote>
 
