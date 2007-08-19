@@ -45,6 +45,9 @@ class Remote(object):
 
 	def addButton(self, cfg, cb):
 		name = cfg.getAttribute("name")
+		id = cfg.getAttribute("id")
+		if not id:
+			id = name
 		xa = cfg.getAttribute("colspan")
 		x = [-1, -1]
 		if xa:
@@ -54,7 +57,8 @@ class Remote(object):
 		if ya:
 			y = ya.split("-")
 		btn = gtk.Button(name)
-		btn.pyr_name = name
+		btn.mrc_name = name
+		btn.mrc_id = id
 		btn.connect("clicked", self.buttonWrapperCB, cb)
 		if xa or ya:
 			self.addButtonFull(btn, int(x[0]), int(x[1]), int(y[0]),
@@ -130,8 +134,8 @@ class Remote(object):
 		self.table.attach(frame, self.table_x, self.table_x + 1, self.table_y,
 						  self.table_y + 1)
 		slider.show()
-		slider.pyr_name = name
-		slider.pyr_idx = self.table_x
+		slider.mrc_name = name
+		slider.mrc_idx = self.table_x
 		self.table_x = self.table_x + 1
 		if not self.defwidget:
 			self.defwidget = slider

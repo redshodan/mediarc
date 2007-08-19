@@ -44,8 +44,8 @@ class Control(object):
 		adj = self.slider.get_adjustment()
 		val = float(self.left[0]) / float(self.limits[1]) * 100
 		adj.set_all(val, 0, 100, float(self.step), float(self.step) * 2, 0)
-		self.ui.table.attach(self.btn, self.slider.pyr_idx,
-							 self.slider.pyr_idx + 1, self.ui.table_y + 1,
+		self.ui.table.attach(self.btn, self.slider.mrc_idx,
+							 self.slider.mrc_idx + 1, self.ui.table_y + 1,
 							 self.ui.table_y + 2, gtk.SHRINK, gtk.SHRINK)
 		self.setValue(val)
 		self.updateBtn()

@@ -42,25 +42,25 @@ class Serial(object):
 		for row in buttons.getElems("row"):
 			for btn in row.getElems("button"):
 				button = self.ui.addButton(btn, self.buttonCB)
-				button.pyr_cmds = []
+				button.mrc_cmds = []
 				for elem in btn.getElems("command"):
 					cmd = self.driver.getBtnCmds(elem.getAttr("name"))
 					if not cmd:
 						print "Invalid command %s for button %s" % \
-							  (cmd, button.pyr_name)
+							  (cmd, button.mrc_id)
 					else:
-						button.pyr_cmds.append(cmd)
-						self.btns[button.pyr_name] = button
+						button.mrc_cmds.append(cmd)
+						self.btns[button.mrc_id] = button
 			self.ui.addRow()
 		return
 
 
 	def buttonCB(self, button):
-		print "Serial cb:", button.pyr_name
-		for cmd in button.pyr_cmds:
+		print "Serial cb:", button.mrc_id
+		for cmd in button.mrc_cmds:
 			self.driver.send(cmd)
-		if not len(button.pyr_cmds):
-			print "Error. Button %s had no command set" % button.pyr_name
+		if not len(button.mrc_cmds):
+			print "Error. Button %s had no command set" % button.mrc_id
 		return
 
 

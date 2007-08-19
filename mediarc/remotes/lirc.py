@@ -27,7 +27,7 @@ class LIRC(object):
 
 
 	def buttonCB(self, button):
-		self.doCmd(button.pyr_name)
+		self.doCmd(button.mrc_id)
 		return
 
 
