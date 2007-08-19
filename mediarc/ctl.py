@@ -1,4 +1,5 @@
 import socket, gobject
+from mediarc import interface
 
 
 
@@ -19,8 +20,9 @@ def init(cfg):
 		sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		sock.bind((address, port))
 		sock.listen(5)
-		gobject.io_add_watch(sock, gobject.IO_IN | gobject.IO_HUP | gobject.IO_ERR,
-							ctlSockCB)
+		gobject.io_add_watch(sock,
+							 gobject.IO_IN | gobject.IO_HUP | gobject.IO_ERR,
+							 ctlSockCB)
 	except Exception, e:
 		print "Failed to setup control socket:"
 		print e
@@ -63,6 +65,7 @@ def cliSockCB(sock, condition, address):
 				sock.close()
 				return False
 			print "read from %s: %s" % (str(address), cmd)
+			handleCMD(address, cmd)
 			return True
 		if gobject.IO_HUP & condition or gobject.IO_ERR & condition:
 			print "Error on control socket, closing it down"
@@ -75,3 +78,10 @@ def cliSockCB(sock, condition, address):
 			sock.close()
 		except: pass
 	return False
+
+
+def handleCMD(address, cmd):
+	cmd = cmd.strip()
+	if cmd == "FOCUS":
+		interface.win.grab_focus()
+	return
