@@ -18,6 +18,7 @@ def init(cfg):
 	print "Setting up control socket on %s:%d" % (address, port)
 	try:
 		sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 		sock.bind((address, port))
 		sock.listen(5)
 		gobject.io_add_watch(sock,
@@ -30,7 +31,6 @@ def init(cfg):
 
 
 def ctlSockCB(sock, condition):
-	print "ctlSockCB"
 	if gobject.IO_IN & condition:
 		print "Accepting new client connection on control socket"
 		try:
@@ -57,14 +57,12 @@ def ctlSockCB(sock, condition):
 
 def cliSockCB(sock, condition, address):
 	try:
-		print "cliSockCB"
 		if gobject.IO_IN & condition:
 			cmd = sock.readline()
 			if not cmd or not len(cmd):
 				print "Closing connection from:", address
 				sock.close()
 				return False
-			print "read from %s: %s" % (str(address), cmd)
 			handleCMD(address, cmd)
 			return True
 		if gobject.IO_HUP & condition or gobject.IO_ERR & condition:
@@ -82,6 +80,7 @@ def cliSockCB(sock, condition, address):
 
 def handleCMD(address, cmd):
 	cmd = cmd.strip()
+	print "Handling cmd from %s: %s" % (str(address), cmd)
 	if cmd == "FOCUS":
-		interface.win.grab_focus()
+		gobject.idle_add(interface.win.win.present)
 	return
