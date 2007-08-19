@@ -4,17 +4,13 @@ import sys
 from optparse import OptionParser
 
 
-datadir = "@DATADIR@"
-
-
 parser = OptionParser()
-parser.add_option("-d", "--datadir", dest="datadir",
+parser.add_option("-c", "--config", dest="config", default="config.xml",
+                  help="set the config file")
+parser.add_option("-d", "--datadir", dest="datadir", default="@DATADIR@",
                   help="set the data directory")
 (options, args) = parser.parse_args()
 
-if options.datadir:
-	datadir = options.datadir
-
-sys.path = [datadir] + sys.path
+sys.path = [options.datadir] + sys.path
 import mediarc
-mediarc.run(datadir)
+mediarc.run(options)
