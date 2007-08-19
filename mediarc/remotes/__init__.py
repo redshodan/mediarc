@@ -14,9 +14,10 @@ def init(cfg):
 		mod.init(cfg)
 	for elem in cfg.getElems("remotes/remote"):
 		remote = load(elem)
-		if not len(remotes):
-			cur_remote = remote
-		remotes[remote.name] = remote
+		if remote:
+			if not len(remotes):
+				cur_remote = remote
+			remotes[remote.name] = remote
 	return
 
 
