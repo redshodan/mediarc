@@ -1,39 +1,19 @@
-SUBDIRS =
+SUBDIRS = config drivers icons mediarc themes
 
 ACLOCAL_AMFLAGS = -I m4
 
+# Binary
 bin_SCRIPTS = bin/mediarc
 
+# Docs
 docfilesdir = $(docdir)
-docfiles_DATA = \
-	README \
-	COPYING
-
-mediarcdir = $(pkgdatadir)/mediarc
-mediarc_DATA = \
-	$(srcdir)/mediarc/*.py
-
-mediarc_interfacedir = $(pkgdatadir)/mediarc/interface
-mediarc_interface_DATA = \
-	$(srcdir)/mediarc/interface/*.py
-
-mediarc_remotesdir = $(pkgdatadir)/mediarc/remotes
-mediarc_remotes_DATA = \
-	$(srcdir)/mediarc/remotes/*.py
-
-mediarc_serialdir = $(pkgdatadir)/mediarc/remotes/serial
-mediarc_serial_DATA = \
-	$(srcdir)/mediarc/remotes/serial/*.py
-
-mediarc_oleviadir = $(pkgdatadir)/mediarc/remotes/serial/olevia
-mediarc_olevia_DATA = \
-	$(srcdir)/mediarc/remotes/serial/olevia/*.py
+docfiles_DATA = README COPYING
 
 EXTRA_DIST = \
-	$(docfiles_DATA) \
-	$(mediarc_DATA) \
 	autogen.sh \
-	scripts/mediarc.in
+	configure.ac \
+	Makefile.am \
+	bin/mediarc.in
 
 DISTCLEANFILES = \
 	bin/mediarc
@@ -62,6 +42,3 @@ MAINTAINERCLEANDIRS = \
 .PHONY: svnignore
 svnignore:
 	misc/svnignore-update.sh
-
-clean-local:
-	find mediarc -name '*.pyc' -exec rm {} \;
