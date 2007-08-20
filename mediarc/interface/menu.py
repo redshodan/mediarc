@@ -1,11 +1,12 @@
 import gtk
-
+from about import About
 
 
 class Menu(object):
 	def __init__(self, cfg, win):
 		self.cfg = cfg
 		self.win = win
+		self.about = None
 		self.remote_count = 0
 		self.bar = gtk.MenuBar()
 		self.win.top_bin.pack_start(self.bar, False)
@@ -72,7 +73,9 @@ class Menu(object):
 
 
 	def menuAboutCB(self, widget):
-		print "AboutCB"
+		if not self.about:
+			self.about = About()
+		self.about.win.present()
 		return False
 
 

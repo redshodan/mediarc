@@ -5,12 +5,14 @@ import mydom, remotes, interface, ctl
 
 
 location = None
+version = None
 
 
 
 def run(options):
-	global location
+	global location, version
 	location = options.datadir
+	version = options.version
 	config = mydom.readNew(options.config)
 	theme = config.getElem("config/theme")
 	if theme and theme.getAttr("use-remotes") == "true":
