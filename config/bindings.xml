@@ -23,8 +23,8 @@
     <toolbar>
       <binding type="context-left" key="&lt;shift&gt;Left"/>
       <binding type="context-right" key="&lt;shift&gt;Right"/>
-      <binding type="context-up" key="bracketleft"/>
-      <binding type="context-down" key="bracketright"/>
+      <binding type="context-up" key="bracketright"/>
+      <binding type="context-down" key="bracketleft"/>
     </toolbar>
     <remote-template>
       <binding type="power" key="F12"/>
