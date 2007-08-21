@@ -29,7 +29,7 @@ def readNew(aFile):
 
 def initDoc(doc):
 	injectFuncs(doc)
-	injectFuncsAllChildren(doc.root())
+	injectFuncsAllChildren(doc)
 	injectDocFuncs(doc)
 	doc.unIndent()
 	return

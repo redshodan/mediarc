@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!--This example config is my personal configuration. It is included here as
+    an example of a full config file. See the config-template.xml for 
+    documentation of this.
+-->
 <mediarc>
 
-  <config>
-    <theme use-remotes="true"/>
-    <ctl address="localhost" port="2424"/>
-<!--    <window mode="tabbed"/>  -->
-  </config>
-
-  <tv name="TV" remote="TV" snd-remote="Sound">
+  <tv name="TV" remote="TV" snd-remote="Sound" default-input="MythTV">
     <input name="MythTV" cmd="hdmi" snd-src="PCM" key="F1"/>
     <input name="TV" cmd="tv" snd-src="Line" remote="Cable" key="F2"/>
     <input name="DVD" cmd="component" snd-src="Line" remote="DVD" key="F3"/>

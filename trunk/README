@@ -1,1 +1,54 @@
-this is a readme
+Description
+===========
+
+MediaRC is a remote control program intended for controlling various media
+devices found in a home theater or with a PVR like MythTV. It is an extendable
+program for which new drivers can easily be added.
+
+
+
+Installation
+============
+
+See the INSTALL for generic instructions on how to install using autoconf based
+distributions.
+
+
+
+Configuration
+=============
+
+MediaRC is a highly flexable and configurable application. This means the config
+file is somewhat complex. Care was taken to ensure that the default behavior in
+most cases makes sense, but most of it can be overridden if desired. 
+
+This README describes the overall intent of how MediaRC works with its config
+files. A much more detailed description can be found in the
+config/config-template.xml file. A full example config can be found in the
+config/config-example.xml. That is my personal config file.
+
+A config file consists of a global config definition, a TV definition and a
+series of remote definitions.
+
+The global config gives you some control over how MediaRC looks and behaves. See
+the following section on the control interface for a more detailed description.
+
+A TV definition is used to give you quick and convient access to inputs of a TV.
+Each device plugged into a TV will have its own setup for sound and its own
+remote control. The TV definition allows you to link up TV inputs to remotes and
+a sound remote. Once an input has been selected the associated sound source can
+be controlled using the context up and down keys (defaulted to [ and ] following
+the default MythTV bindings).
+
+The remotes are defined by their driver type. There are sound remotes and normal
+remotes. Normal remotes can change their button layout. Sound remotes only can
+change the sound controls that they show.
+
+LIRC remotes must be configured completely for each remote. They must match up
+to the local systems lircd.conf with remote and button names. The serial remotes
+are predefined with their commands and buttons so they can have predefined button
+layouts. A user config file can always override the button layout by specifying
+its own.
+
+Buttons are laid out in rows in a table similiar to HTML tables. Column and row
+spanning can be defined for each button to make a nice looking layout.

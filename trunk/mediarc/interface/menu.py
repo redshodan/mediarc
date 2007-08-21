@@ -59,9 +59,12 @@ class Menu(object):
 		if not accel and name in interface.bindings.menu.keys():
 			accel = interface.bindings.menu[name]
 		if accel:
-			(key, mod) = gtk.accelerator_parse(accel)
-			mi.add_accelerator("activate", self.win.top_group, key, mod,
-							   gtk.ACCEL_VISIBLE)
+			(keyval, modval) = gtk.accelerator_parse(accel)
+			if not keyval:
+				print "Failed to parse key binding:", accel
+			else:
+				mi.add_accelerator("activate", self.win.top_group, keyval,
+								   modval, gtk.ACCEL_VISIBLE)
 		return mi
 
 

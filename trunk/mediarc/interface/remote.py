@@ -112,8 +112,11 @@ class Remote(object):
 			accel = key
 		if accel:
 			(keyval, modifier) = gtk.accelerator_parse(accel)
-			btn.add_accelerator("clicked", self.accels, keyval, modifier,
-								gtk.ACCEL_VISIBLE)
+			if not keyval:
+				print "Failed to parse key binding:", accel
+			else:
+				btn.add_accelerator("clicked", self.accels, keyval, modifier,
+									gtk.ACCEL_VISIBLE)
 		return
 
 
@@ -182,9 +185,6 @@ class Remote(object):
 							  (mediarc.location))
 		elif type == "button":
 			return
-			btn.set_image_position(gtk.POS_TOP)
-			label = name
-			img.set_from_file("%s/icons/btn.png" % (mediarc.location))
 		elif type == "plus":
 			btn.set_image_position(gtk.POS_TOP)
 			label = name
@@ -194,6 +194,7 @@ class Remote(object):
 			label = name
 			stock = gtk.STOCK_REMOVE
 		else:
+			return
 			stock = type
 		if stock:
 			img.set_from_stock(stock, gtk.ICON_SIZE_BUTTON)
