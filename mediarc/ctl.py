@@ -11,9 +11,11 @@ def init(cfg):
 	if mode and mode != "enable":
 		print "Control socket configured off, not starting"
 		return
-	address = elem.getAttr("address")
+	address = None
+	if elem: address = elem.getAttr("address")
 	if not address: address = "localhost"
-	port = elem.getAttrInt("port")
+	port = None
+	if elem: port = elem.getAttrInt("port")
 	if not port: port = 2424
 	print "Setting up control socket on %s:%d" % (address, port)
 	try:

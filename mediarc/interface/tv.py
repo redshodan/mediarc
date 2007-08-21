@@ -20,7 +20,7 @@ class TV(object):
 		self.cfg = cfg
 		self.win = win
 		self.inputs = {}
-		cfg.pullAttrs(self, ["name", "remote", "snd-remote"])
+		cfg.pullAttrs(self, ["name", "remote", "snd-remote", "default-input"])
 		self.addToolbar()
 		for elem in cfg.getElems("input"):
 			self.addInput(elem)
@@ -51,8 +51,11 @@ class TV(object):
 		btn.connect("clicked", self.inputCB, input)
 		if input.key:
 			(keyval, modifier) = gtk.accelerator_parse(input.key)
-			btn.add_accelerator("clicked", self.win.top_group, keyval, modifier,
-								gtk.ACCEL_VISIBLE)
+			if not keyval:
+				print "Failed to parse key binding:", input.key
+			else:
+				btn.add_accelerator("clicked", self.win.top_group, keyval,
+									modifier, gtk.ACCEL_VISIBLE)
 		btn.show()
 		self.bar.insert(btn, -1)
 		return
@@ -74,16 +77,25 @@ class TV(object):
 			if toolbtn[0] in interface.bindings.toolbar.keys():
 				accel = interface.bindings.toolbar[toolbtn[0]]
 				(keyval, modifier) = gtk.accelerator_parse(accel)
-				btn.add_accelerator("clicked", self.win.top_group, keyval,
-									modifier, gtk.ACCEL_VISIBLE)
+				if not keyval:
+					print "Failed to parse key binding:", accel
+				else:
+					btn.add_accelerator("clicked", self.win.top_group, keyval,
+										modifier, gtk.ACCEL_VISIBLE)
 			btn.set_flags(btn.flags() | gtk.CAN_DEFAULT)
 			btn.show()
 			self.bar.insert(btn, -1)
 		return
 
 
-	def inputCB(self, btn, input):
-		print "inputCB", input.name
+	def selectDefInput(self):
+		if getattr(self, "default-input"):
+			self.selectInput(getattr(self, "default-input"))
+		return
+
+
+	def selectInput(self, name):
+		input = self.inputs[name]
 		from mediarc import remotes
 		remote = remotes.remotes[self.remote]
 		remote.doCmd(input.cmd)
@@ -99,6 +111,12 @@ class TV(object):
 			remote = remotes.remotes[input.remote]
 		self.win.selectRemote(remote.name)
 		remotes.selectRemote(remote.name)
+		return
+
+
+	def inputCB(self, btn, input):
+		print "inputCB", input.name
+		self.selectInput(input.name)
 		return
 
 

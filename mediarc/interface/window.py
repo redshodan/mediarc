@@ -121,4 +121,7 @@ class Window(object):
 	def defSelectCB(self, one):
 		self.win.disconnect(self.defSelectID)
 		gobject.idle_add(self.selectRemote, self.defremote.name)
+		from mediarc import interface
+		for key, tv in interface.tvs.iteritems():
+			gobject.idle_add(tv.selectDefInput)
 		return
