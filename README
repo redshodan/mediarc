@@ -24,8 +24,8 @@ most cases makes sense, but most of it can be overridden if desired.
 
 This README describes the overall intent of how MediaRC works with its config
 files. A much more detailed description can be found in the
-config/config-template.xml file. A full example config can be found in the
-config/config-example.xml. That is my personal config file.
+etc/config-template.xml file. A full example config can be found in the
+etc/mediarc.xml. That is my personal config file.
 
 A config file consists of a global config definition, a TV definition and a
 series of remote definitions.

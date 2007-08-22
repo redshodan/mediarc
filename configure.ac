@@ -23,6 +23,7 @@ AC_SUBST(ACLOCAL_AMFLAGS)
 AS_AC_EXPAND(DATADIR, "${datadir}")
 AS_AC_EXPAND(LIBDIR, ${libdir})
 AS_AC_EXPAND(DOCDIR, "${docdir}")
+AS_AC_EXPAND(SYSCONFDIR, "${sysconfdir}")
 
 AC_SUBST(VERSION)
 AC_SUBST(PACKAGE)
@@ -35,8 +36,8 @@ AS_AC_EXPAND(DOCDIR, "${DOCDIR}")
 AC_CONFIG_FILES([ 
 	Makefile
     bin/mediarc
-    config/Makefile
     drivers/Makefile
+    etc/Makefile
     icons/Makefile
     mediarc/Makefile
     themes/Makefile

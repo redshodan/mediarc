@@ -2,8 +2,8 @@ SUBDIRS =
 
 ACLOCAL_AMFLAGS = -I ../m4
 
-configdir = $(pkgdatadir)/config
-config_DATA = $(srcdir)/*.xml
+etcdir = $(sysconfdir)
+etc_DATA = $(srcdir)/mediarc.xml
 
 EXTRA_DIST = 
 DISTCLEANFILES = 
