@@ -20,6 +20,7 @@ PKG_CHECK_MODULES([PYGTK], [gtk+-2.0 >= 2.6.0 pygtk-2.0 >= 2.6.0])
 ACLOCAL_AMFLAGS="\${ACLOCAL_FLAGS}"
 AC_SUBST(ACLOCAL_AMFLAGS)
 
+AS_AC_EXPAND(BINDIR, "${bindir}")
 AS_AC_EXPAND(DATADIR, "${datadir}")
 AS_AC_EXPAND(LIBDIR, ${libdir})
 AS_AC_EXPAND(DOCDIR, "${docdir}")
@@ -36,10 +37,11 @@ AS_AC_EXPAND(DOCDIR, "${DOCDIR}")
 AC_CONFIG_FILES([ 
 	Makefile
     bin/mediarc
+    bin/mediarc-remote
     drivers/Makefile
     etc/Makefile
     icons/Makefile
     mediarc/Makefile
     themes/Makefile
-], [[[ -f bin/mediarc ]] && chmod +x bin/mediarc])
+], [chmod +x bin/mediarc bin/mediarc-remote 2>/dev/null])
 AC_OUTPUT

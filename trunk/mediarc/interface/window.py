@@ -118,6 +118,14 @@ class Window(object):
 		return
 
 
+	def presentCB(self):
+		print "Window.presentCB"
+		#gtk.gdk.flush()
+		#self.win.present()
+		self.win.map()
+		return False
+
+
 	def defSelectCB(self, one):
 		self.win.disconnect(self.defSelectID)
 		gobject.idle_add(self.selectRemote, self.defremote.name)

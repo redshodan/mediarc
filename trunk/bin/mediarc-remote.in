@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo FOCUS > /dev/tcp/127.0.0.1/2424
+if [ $? -ne 0 ]; then
+    echo "focus failed"
+    echo exec @BINDIR@/mediarc
+fi
