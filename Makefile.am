@@ -3,7 +3,7 @@ SUBDIRS = drivers etc icons mediarc themes
 ACLOCAL_AMFLAGS = -I m4
 
 # Binary
-bin_SCRIPTS = bin/mediarc
+bin_SCRIPTS = bin/mediarc bin/mediarc-remote
 
 # Docs
 docfilesdir = $(docdir)
@@ -13,10 +13,12 @@ EXTRA_DIST = \
 	autogen.sh \
 	configure.ac \
 	Makefile.am \
-	bin/mediarc.in
+	bin/mediarc.in \
+	bin/mediarc-remote.in
 
 DISTCLEANFILES = \
-	bin/mediarc
+	bin/mediarc \
+	bin/mediarc-remote
 
 MAINTAINERCLEANFILES = \
 	configure \

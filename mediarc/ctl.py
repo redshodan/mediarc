@@ -40,7 +40,6 @@ def ctlSockCB(sock, condition):
 			print "New connection from:", address
 			newsock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 			newf = newsock.makefile()
-			sock.close()
 			gobject.io_add_watch(newf,
 								 gobject.IO_IN | gobject.IO_HUP | gobject.IO_ERR,
 								 cliSockCB, address)
@@ -68,7 +67,7 @@ def cliSockCB(sock, condition, address):
 			handleCMD(address, cmd)
 			return True
 		if gobject.IO_HUP & condition or gobject.IO_ERR & condition:
-			print "Error on control socket, closing it down"
+			print "Closing down socket because of error. From:", address
 			sock.close()
 			return False
 	except Exception, e:
@@ -84,5 +83,6 @@ def handleCMD(address, cmd):
 	cmd = cmd.strip()
 	print "Handling cmd from %s: %s" % (str(address), cmd)
 	if cmd == "FOCUS":
-		gobject.idle_add(interface.win.win.present)
+		print "Focusing"
+		gobject.idle_add(interface.win.presentCB)
 	return

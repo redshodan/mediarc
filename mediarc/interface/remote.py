@@ -27,10 +27,10 @@ class Remote(object):
 		self.frame.set_shadow_type(gtk.SHADOW_NONE)
 		self.frame.show()
 		self.ebox = gtk.EventBox()
-		if type == "sound":
-			self.ebox.set_name("remote-ctl-snd")
-		else:
-			self.ebox.set_name("remote-ctl")
+		#if type == "sound":
+		#	self.ebox.set_name("remote-ctl-snd")
+		#else:
+		self.ebox.set_name("remote-ctl")
 		self.ebox.add(self.table)
 		self.ebox.show()
 		self.frame.add(self.ebox)
