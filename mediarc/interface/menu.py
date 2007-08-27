@@ -30,7 +30,7 @@ class Menu(object):
 		self.view = self.makeSubMenu(view)
 		self.makeItem("Single", self.view, self.selectViewCB, "single")
 		self.makeItem("Tabbed", self.view, self.selectViewCB, "tabbed")
-		self.makeItem("Multiple", self.view, self.selectViewCB, "multiple")
+		#self.makeItem("Multiple", self.view, self.selectViewCB, "multiple")
 		return
 
 
