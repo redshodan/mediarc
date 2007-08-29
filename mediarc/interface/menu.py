@@ -2,6 +2,15 @@ import gtk
 from about import About
 
 
+
+toolbtns = [
+	["context-vol+", "Vol+"], ["context-vol-", "Vol-"],
+	["context-playpause", "Play/Pause"],
+	["context-stop", "Stop"], ["context-forward", "Forward"],
+	["context-reverse", "Reverse"]]
+
+
+
 class Menu(object):
 	def __init__(self, cfg, win):
 		self.cfg = cfg
@@ -72,6 +81,20 @@ class Menu(object):
 		self.remote_count = self.remote_count + 1
 		self.makeItem(remote.name, self.remotes, self.selectRemoteCB,
 					  remote.name, "<shift>F%d" % self.remote_count)
+		return
+
+
+	def initActions(self):
+		from mediarc import interface
+		actions= self.makeItem("Actions", self.bar)
+		self.actions = self.makeSubMenu(actions)
+		for toolbtn in toolbtns:
+			tv = interface.tvs.values()[0]
+			accel = None
+			if toolbtn[0] in interface.bindings.toolbar.keys():
+				accel = interface.bindings.toolbar[toolbtn[0]]
+			self.makeItem(toolbtn[1], self.actions, tv.contextArrowCB,
+						  toolbtn[0], accel)
 		return
 
 

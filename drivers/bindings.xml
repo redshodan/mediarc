@@ -21,10 +21,12 @@
       <binding type="Multiple" key="&lt;ctrl&gt;m"/>
     </menu>
     <toolbar>
-      <binding type="context-left" key="&lt;shift&gt;Left"/>
-      <binding type="context-right" key="&lt;shift&gt;Right"/>
-      <binding type="context-up" key="bracketright"/>
-      <binding type="context-down" key="bracketleft"/>
+      <binding type="context-playpause" key="&lt;shift&gt;Up"/>
+      <binding type="context-stop" key="&lt;shift&gt;Down"/>
+      <binding type="context-forward" key="&lt;shift&gt;Right"/>
+      <binding type="context-reverse" key="&lt;shift&gt;Left"/>
+      <binding type="context-vol+" key="bracketright"/>
+      <binding type="context-vol-" key="bracketleft"/>
     </toolbar>
     <remote-template>
       <binding type="power" key="F12"/>

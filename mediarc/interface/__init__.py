@@ -22,6 +22,7 @@ def init(cfg):
 	for elem in cfg.getElems("tv"):
 		tv = TV(elem, win)
 		tvs[tv.name] = tv
+	win.menu.initActions()
 	win.initRemotes()
 	status = StatusIcon(cfg, win)
 	return
