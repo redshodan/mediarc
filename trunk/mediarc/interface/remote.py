@@ -67,7 +67,7 @@ class Remote(object):
 			self.addButtonAuto(btn)
 		type = cfg.getAttribute("type")
 		if type and len(type):
-			self.mapStock(btn, type, name)
+			mapStock(btn, type, name)
 		self.setBtnAccel(cfg, btn)
 		if not self.defwidget:
 			self.defwidget = btn
@@ -145,64 +145,6 @@ class Remote(object):
 		return slider
 
 
-	def mapStock(self, btn, type, name):
-		stock = None
-		img = gtk.Image()
-		label = ""
-		if type == "power":
-			return
-		elif type == "number":
-			btn.set_label(" %s " % name)
-			return
-			img.set_from_file("%s/icons/%s/%s.png" % \
-							  (mediarc.location, self.win.icons_size, name))
-		elif type == "pause":
-			stock = gtk.STOCK_MEDIA_PAUSE
-		elif type == "play":
-			stock = gtk.STOCK_MEDIA_PLAY
-		elif type == "stop":
-			stock = gtk.STOCK_MEDIA_STOP
-		elif type == "record":
-			stock = gtk.STOCK_MEDIA_RECORD
-		elif type == "skipleft":
-			stock = gtk.STOCK_MEDIA_PREVIOUS
-		elif type == "skipright":
-			stock = gtk.STOCK_MEDIA_NEXT
-		elif type == "forward":
-			stock = gtk.STOCK_MEDIA_FORWARD
-		elif type == "rewind":
-			stock = gtk.STOCK_MEDIA_REWIND
-		elif type == "up":
-			stock = gtk.STOCK_GO_UP
-		elif type == "down":
-			stock = gtk.STOCK_GO_DOWN
-		elif type == "left":
-			stock = gtk.STOCK_GO_BACK
-		elif type == "right":
-			stock = gtk.STOCK_GO_FORWARD
-		elif type == "playpause":
-			img.set_from_file("%s/icons/playpause.png" % \
-							  (mediarc.location))
-		elif type == "button":
-			return
-		elif type == "plus":
-			btn.set_image_position(gtk.POS_TOP)
-			label = name
-			stock = gtk.STOCK_ADD
-		elif type == "minus":
-			btn.set_image_position(gtk.POS_TOP)
-			label = name
-			stock = gtk.STOCK_REMOVE
-		else:
-			return
-			stock = type
-		if stock:
-			img.set_from_stock(stock, gtk.ICON_SIZE_BUTTON)
-		btn.set_label(label)
-		btn.set_image(img)
-		return
-
-
 	def select(self, force=False):
 		if not self.selected or force:
 			self.selected = True
@@ -219,3 +161,65 @@ class Remote(object):
 			self.win.win.remove_accel_group(self.accels)
 			self.frame.set_shadow_type(gtk.SHADOW_NONE)
 		return
+
+
+
+def mapStock(btn, type, name):
+	stock = None
+	img = None
+	label = ""
+	if type == "power":
+		return
+	elif type == "number":
+		btn.set_label(" %s " % name)
+		return
+	elif type == "pause":
+		stock = gtk.STOCK_MEDIA_PAUSE
+	elif type == "play":
+		stock = gtk.STOCK_MEDIA_PLAY
+	elif type == "stop":
+		stock = gtk.STOCK_MEDIA_STOP
+	elif type == "record":
+		stock = gtk.STOCK_MEDIA_RECORD
+	elif type == "skipleft":
+		stock = gtk.STOCK_MEDIA_PREVIOUS
+	elif type == "skipright":
+		stock = gtk.STOCK_MEDIA_NEXT
+	elif type == "forward":
+		stock = gtk.STOCK_MEDIA_FORWARD
+	elif type == "rewind":
+		stock = gtk.STOCK_MEDIA_REWIND
+	elif type == "up":
+		stock = gtk.STOCK_GO_UP
+	elif type == "down":
+		stock = gtk.STOCK_GO_DOWN
+	elif type == "left":
+		stock = gtk.STOCK_GO_BACK
+	elif type == "right":
+		stock = gtk.STOCK_GO_FORWARD
+	elif type == "playpause":
+		img = gtk.Image()
+		img.set_from_file("%s/icons/playpause.png" % \
+						  (mediarc.location))
+	elif type == "button":
+		return
+	elif type == "plus":
+		btn.set_image_position(gtk.POS_TOP)
+		label = name
+		stock = gtk.STOCK_ADD
+	elif type == "minus":
+		btn.set_image_position(gtk.POS_TOP)
+		label = name
+		stock = gtk.STOCK_REMOVE
+	else:
+		return
+		stock = type
+
+	btn.set_label(label)
+	if stock:
+		if not img:
+			img = gtk.Image()
+		img.set_from_stock(stock, gtk.ICON_SIZE_BUTTON)
+	if img:
+		btn.set_image(img)
+	return

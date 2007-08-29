@@ -24,7 +24,7 @@ class TV(object):
 		self.addToolbar()
 		for elem in cfg.getElems("input"):
 			self.addInput(elem)
-		self.addContextArrows()
+		#self.addContextArrows()
 		return
 
 
@@ -123,9 +123,9 @@ class TV(object):
 	def contextArrowCB(self, btn, name):
 		print "contextArrowCB", name
 		from mediarc import remotes
-		if name == "context-up" and remotes.cur_snd_remote:
+		if name == "context-vol+" and remotes.cur_snd_remote:
 			remotes.cur_snd_remote.incCurSrc()
-		elif name == "context-down" and remotes.cur_snd_remote:
+		elif name == "context-vol-" and remotes.cur_snd_remote:
 			remotes.cur_snd_remote.decCurSrc()
 		else:
 			remotes.cur_remote.doContextArrow(name)
