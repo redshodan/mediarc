@@ -1,7 +1,18 @@
 #!/bin/bash
 
-echo FOCUS > /dev/tcp/127.0.0.1/2424
+
+if [ -z "$1" ]; then
+    CMD="FOCUS"
+    unset REMOTE
+    unset RCMD
+else
+    CMD="$1"
+    REMOTE=$2
+    RCMD=$3
+fi
+
+echo "${CMD} ${REMOTE} ${RCMD}" > /dev/tcp/127.0.0.1/2424
 if [ $? -ne 0 ]; then
-    echo "focus failed"
-    echo exec @BINDIR@/mediarc
+    echo "Failed to send command"
+    exec @BINDIR@/mediarc
 fi

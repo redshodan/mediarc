@@ -1,5 +1,5 @@
 import socket, gobject
-from mediarc import interface
+from mediarc import interface, remotes
 
 
 
@@ -85,4 +85,12 @@ def handleCMD(address, cmd):
 	if cmd == "FOCUS":
 		print "Focusing"
 		gobject.idle_add(interface.win.presentCB)
+	elif cmd.startswith("CMD"):
+		arr = cmd.split()
+		print "Sending to %s cmd %s" % (arr[1], arr[2])
+		remotes.doCmd(arr[1], arr[2])
+	elif cmd.startswith("BTN"):
+		arr = cmd.split()
+		print "Sending to %s btn %s" % (arr[1], arr[2])
+		remotes.doButton(arr[1], arr[2])
 	return
