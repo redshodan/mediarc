@@ -31,6 +31,10 @@ class LIRC(object):
 		return
 
 
+	def doButton(self, button):
+		return self.doCmd(button)
+
+
 	def doCmd(self, cmdstr):
 		print "lirc doCmd:", cmdstr
 		global lirc_sock

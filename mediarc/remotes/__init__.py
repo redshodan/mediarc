@@ -47,3 +47,15 @@ def selectSndRemote(name):
 	global remotes, cur_snd_remote
 	cur_snd_remote = remotes[name]
 	return
+
+
+def doCmd(remote, cmd):
+	global remotes
+	remotes[remote].doCmd(cmd)
+	return
+
+
+def doButton(remote, button):
+	global remotes
+	remotes[remote].doButton(button)
+	return

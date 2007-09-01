@@ -174,6 +174,14 @@ class ALSA(object):
 		return
 
 
+	def doCmd(self, name):
+		return
+
+
+	def doButton(self, name):
+		return
+
+
 
 def init(cfg):
 	return

@@ -64,6 +64,11 @@ class Serial(object):
 		return
 
 
+	def doButton(self, button):
+		self.buttonCB(self.btns[button])
+		return
+
+
 	def doCmd(self, cmdstr):
 		print "Serial doCmd:", cmdstr
 		cmd = self.driver.getBtnCmds(cmdstr)
