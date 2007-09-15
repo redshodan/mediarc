@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--MediaRC configuration file-->
+<mediarc>
+
+  <!--Global configuration. Optional.-->
+  <config>
+
+    <!--Optional.
+        Enable the remote theme. On by default. Attributes:
+          use-remotes -- Use the remote theme. Values: true, false or none
+    -->
+    <theme use-remotes="true"/>
+
+    <!--Optional.
+        Enable the control port for remote controlling MediaRC. See the README
+        for a description of the protocol. Attributes:
+          address -- Optional. Address to bind to. Can be IP or a DNS name.
+          port -- Optional. Port to bind to. Default is 2424.
+    -->
+    <ctl address="localhost" port="2424"/>
+
+    <!--Optional.
+        Window display mode. Attributes:
+          mode -- Valid values are: single, tabbed
+    -->
+    <window mode="tabbed"/>
+  </config>
+
+
+  <!--Optional.
+      TV definition. This associates remotes with TV inputs and sound sources.
+      Attributes:
+        name -- The name of the TV to display
+        remote -- The default remote to choose for this TV
+        snd-remote -- The default sound remote to choose for this TV
+  -->
+  <tv name="TV" remote="TV" snd-remote="Sound">
+
+    <!--Definition of a TV input. Attributes:
+          name -- Name of the input to display
+          cmd -- The command to send to the remote when this input is selected
+          snd-src -- Optional. The sound source to choose when selecting this
+                     input
+          remote -- Optional. The remote to choose when selecting this input
+          key -- Optional. The key binding to set on this input
+    -->
+    <input name="MythTV" cmd="hdmi" snd-src="PCM" key="F1"/>
+  </tv>
+
+
+  <!--Remote control definitions-->
+  <remotes>
+
+    <!--A remote control definition. Attributes:
+          name -- Name of the remote
+          driver -- Driver for this remote. Valid: alsa, lirc, serial
+
+        Examples of all the drivers follow after this remote definition.
+        See each remote for configuration for each driver.
+
+        Buttons are defined for lirc and serial remotes. They consist of a 
+        series of rows which button definitions in each row. The buttons are
+        displayed in a table similiar to HTML table's with row and column
+        spanning. Rows and columns are zero indexed. A short example follows.
+
+        Attributes for the buttons tag:
+          rows -- Optional. Max number of rows
+          cols -- Optional. Max number of columns
+        <buttons rows="2" cols="3">
+          A row definition. No attributes.
+          <row>
+            A button. Attributes:
+              name -- Name of the button. Can be displayed as text.
+              id -- Used by some drivers. If not specified it is just the name.
+              type -- Optional. Button type. Values: 
+                button -- Displays the name. The same as no type attribute.
+                number -- Displays a number button like for channels
+                Special purpose buttons with images only:
+                  pause, play, stop, record, skipleft, skipright, forward,
+                  rewind, up, down, left, right, playpause
+                Special purpose buttons which display an image and the name:
+                  plus, minus
+              colspan -- Optional. Which columns to span. Format: X1-X2
+              rowspan -- Optional. Which rows to span. Format: Y1-Y2
+              key -- Optional. Key to bind to this button
+            <button name="power" type="power" colspan="0-3" rowspan="0-1"/>
+          </row>
+        </buttons>
+    -->
+
+    <!--Serial remote control. Commands and buttons are predefined as part of
+        the particular serial driver. Either can be overridden here.
+        Attributes:
+          manufacturer -- Manufacturer name. Used to load driver definition.
+          model -- Model name. Used to load driver definition.
+          device -- Serial device to connect to.
+    -->
+    <remote name="TV" driver="serial" manufacturer="olevia" model="432V" 
+            device="/dev/ttyS0"/>
+
+    <!--LIRC remote control. Because LIRC remote definitions are fluid each
+        remote that you use must be fully defined here. Each button defined
+        will map to a LIRC remote button. The buttons 'id' attribute will be
+        used to send as the LIRC button name. Attributes:
+          id -- ID string to send to LIRCD which identifies this remote
+    -->
+    <remote name="Cable" driver="lirc" id="cable"/>
+
+    <!--ALSA sound remote control. Contains source names which map to the ALSA
+        name. Attributes:
+          card -- ALSA card number for this sound card
+    -->
+    <remote name="Sound" driver="alsa" card="0" >
+      <!--A source definition. Attributes:
+            name -- ALSA name of the source
+      -->
+      <source name="Master"/>
+    </remote>
+  </remotes>
+</mediarc>

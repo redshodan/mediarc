@@ -1,0 +1,34 @@
+#!/usr/bin/env python
+
+import os, sys
+from optparse import OptionParser
+
+
+
+version = "@VERSION@"
+
+
+
+def printVersion(option, opt, value, parser):
+	print "MediaRC version %s" % version
+	sys.exit(0)
+	return
+
+
+
+parser = OptionParser()
+parser.add_option("-c", "--config", dest="config",
+				  default=os.path.join("@SYSCONFDIR@", "mediarc.xml"),
+                  help="set the config file")
+parser.add_option("-d", "--datadir", dest="datadir",
+				  default=os.path.join("@DATADIR@", "mediarc"),
+                  help="set the data directory")
+parser.add_option("-v", "--version", action="callback",
+				  callback=printVersion, help="print the version and exit")
+(options, args) = parser.parse_args()
+options.version = version
+
+sys.path = [options.datadir] + sys.path
+import mediarc
+options
+mediarc.run(options)

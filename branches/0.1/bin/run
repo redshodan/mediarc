@@ -1,0 +1,4 @@
+#!/bin/bash
+
+PARTIAL=`dirname $0`/
+exec -a mediarc ${PARTIAL}mediarc -d ${PARTIAL}/.. $*

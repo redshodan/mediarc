@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mediarc>
+  <!--
+      Key bindings follow the rules of the GTK binding parser. Angle brackets
+      must be escaped according to the XML rules.
+      
+      <   is   &lt;
+      >   is   &gt;
+
+      From the PyGTK documentation:
+      The format looks like "<Control>a" or "<Shift><Alt>F1" or "<Release>z"
+      (the last one is for key release). The parser is fairly liberal and
+      allows lower or upper case, and also abbreviations such as "<Ctl>" and
+      "<Ctrl>".
+    -->
+  <bindings>
+    <menu>
+      <binding type="Exit" key="&lt;ctrl&gt;q"/>
+      <binding type="Single" key="&lt;ctrl&gt;s"/>
+      <binding type="Tabbed" key="&lt;ctrl&gt;t"/>
+      <binding type="Multiple" key="&lt;ctrl&gt;m"/>
+    </menu>
+    <toolbar>
+      <binding type="context-playpause" key="&lt;shift&gt;Up"/>
+      <binding type="context-stop" key="&lt;shift&gt;Down"/>
+      <binding type="context-forward" key="&lt;shift&gt;Right"/>
+      <binding type="context-reverse" key="&lt;shift&gt;Left"/>
+      <binding type="context-vol+" key="bracketright"/>
+      <binding type="context-vol-" key="bracketleft"/>
+    </toolbar>
+    <remote-template>
+      <binding type="power" key="F12"/>
+      <binding type="skipleft" key="z"/>
+      <binding type="rewind" key="x"/>
+      <binding type="forward" key="c"/>
+      <binding type="skipright" key="v"/>
+      <binding type="playpause" key="Space"/>
+      <binding type="play" key="a"/>
+      <binding type="pause" key="s"/>
+      <binding type="stop" key="d"/>
+      <binding type="left" key="&lt;ctrl&gt;Left"/>
+      <binding type="right" key="&lt;ctrl&gt;Right"/>
+      <binding type="up" key="&lt;ctrl&gt;Up"/>
+      <binding type="down" key="&lt;ctrl&gt;Down"/>
+      <binding type="number" name="0" key="0"/>
+      <binding type="number" name="1" key="1"/>
+      <binding type="number" name="2" key="2"/>
+      <binding type="number" name="3" key="3"/>
+      <binding type="number" name="4" key="4"/>
+      <binding type="number" name="5" key="5"/>
+      <binding type="number" name="6" key="6"/>
+      <binding type="number" name="7" key="7"/>
+      <binding type="number" name="8" key="8"/>
+      <binding type="number" name="9" key="9"/>
+    </remote-template>
+  </bindings>
+</mediarc>
