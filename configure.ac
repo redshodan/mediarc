@@ -41,6 +41,7 @@ AC_CONFIG_FILES([
     drivers/Makefile
     etc/Makefile
     icons/Makefile
+    misc/Makefile
     mediarc/Makefile
     themes/Makefile
 ], [chmod +x bin/mediarc bin/mediarc-remote 2>/dev/null])

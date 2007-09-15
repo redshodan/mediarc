@@ -1,0 +1,13 @@
+[Desktop Entry]
+Categories=Remote Control;Application;GTK;GNOME;
+Name=MediaRC Remote Control
+GenericName=MediaRC Remote Control
+Comment=A media device remote control program
+Version=0.1
+Encoding=UTF-8
+Exec=mediarc
+Icon=mediarc.png
+StartupNotify=true
+StartupWMClass=MediaRC
+Terminal=false
+Type=Application

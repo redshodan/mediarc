@@ -1,7 +1,7 @@
 import gtk, gobject
 from remote import Remote
+import mediarc
 from mediarc.interface.menu import Menu
-
 
 
 class Window(object):
@@ -63,6 +63,8 @@ class Window(object):
 			fullname = "%s: %s" % (fullname, name)
 		self.win = gtk.Window(gtk.WINDOW_TOPLEVEL)
 		self.win.set_title(fullname)
+		self.win.set_icon_from_file("%s/icons/mediarc.png" % \
+									(mediarc.location))
 		self.win.set_default_size(50, 50)
 		self.win.set_resizable(True)
 		self.top_group = gtk.AccelGroup()

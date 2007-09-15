@@ -1,4 +1,4 @@
-SUBDIRS = drivers etc icons mediarc themes
+SUBDIRS = drivers etc icons misc mediarc themes
 
 ACLOCAL_AMFLAGS = -I m4
 

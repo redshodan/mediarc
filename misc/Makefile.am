@@ -2,10 +2,8 @@ SUBDIRS =
 
 ACLOCAL_AMFLAGS = -I ../m4
 
-iconsdir = $(pkgdatadir)/icons
-icons_DATA = $(srcdir)/*.png
-sharedir = /usr/share/pixmaps
-share_DATA = $(srcdir)/mediarc.png
+sharedir = /usr/share/applications
+share_DATA = $(srcdir)/mediarc.desktop
 
 EXTRA_DIST = 
 DISTCLEANFILES = 
