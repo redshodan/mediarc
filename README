@@ -52,3 +52,13 @@ its own.
 
 Buttons are laid out in rows in a table similiar to HTML tables. Column and row
 spanning can be defined for each button to make a nice looking layout.
+
+
+
+Contact
+=======
+
+This is the initial release of MediaRC and certainly some problems will exist.
+Please report any bugs through the issue tracker at:
+
+  http://code.google.com/p/mediarc/
