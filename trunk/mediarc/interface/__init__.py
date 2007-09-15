@@ -24,7 +24,7 @@ def init(cfg):
 		tvs[tv.name] = tv
 	win.menu.initActions()
 	win.initRemotes()
-	status = StatusIcon(cfg, win)
+	#status = StatusIcon(cfg, win)
 	return
 
 
