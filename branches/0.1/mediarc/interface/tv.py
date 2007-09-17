@@ -30,9 +30,9 @@ class TV(object):
 
 	def addToolbar(self):
 		self.bin = gtk.HBox()
-		label = gtk.Label(self.name)
-		label.show()
-		self.bin.pack_start(label, False, False, 10)
+		#label = gtk.Label(self.name + ":")
+		#label.show()
+		#self.bin.pack_start(label, False, False, 10)
 		self.bar = gtk.Toolbar()
 		self.bar.show()
 		self.bin.pack_end(self.bar)
